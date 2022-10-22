@@ -10,7 +10,7 @@ module.exports = class {
 		this.sync_connections = {};
 		this.sended_questions = {};
     }
-    send_to_user_socket_connection(username, data){
+    async send_to_user_socket_connection(username, data){
 		var sockets = await app.database.get_data("user_sockets", username);
 		if(!sockets) return;
 		var servers = {};
@@ -19,7 +19,7 @@ module.exports = class {
 			if(data.socket_id) if(data.socket_id != socket_data.id) return;
 			servers[socket_data.server] = true;
 		});
-		Object.keys(servers).forEach(function(ip){
+		Object.keys(servers).forEach(async function(ip){
 			app.database.send_to_specific_server(ip, {"text": "send_to_user_socket_connection", "username": username, "data": date});
 		});
 	}

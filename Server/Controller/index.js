@@ -126,7 +126,7 @@ module.exports = class {
 					app.controller.user_socket_connections[season.username][socket_id].abbos = {};
 				}
 		    });
-			socket.on("disconnect", function(){
+			socket.on("disconnect", async function(){
 				if(!(seaon.username in app.controller.user_socket_connections)) return;
 				if(!(socket_id in app.controller.user_socket_connections[season.username])) return;
 			    delete app.controller.user_socket_connections[season.username][socket_id];
