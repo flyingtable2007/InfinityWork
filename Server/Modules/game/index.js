@@ -10,7 +10,7 @@ module.exports = class {
 		socket.on("game_heartbeat", function(data){
 			if(!hosting_world) return;
 			try {
-				data.users.forEach(function(u){
+				data.users.forEach(async function(u){
 					var check_if_this_user_is_in_world = await app.database.get_data("game_user_connected_world", u);
 					if(check_if_this_user_is_in_world == username){
 						app.database.send_to_user_socket_connection(u, {"data": {"action": "game_heartbeat", "data": data}, "app": "game"});
