@@ -88,6 +88,8 @@ window.show_email = function(box, email, d){
 
 		document.getElementById("app_email_email_preview_"+id+"_content").innerHTML = "";
 		var e = document.createElement("iframe");
+		e.designMode="On";
+		e.sandBox = true;
 		e.style = "width: 100%; height: 100%; background-color: lightgray; ";
 		e.onload = function(){
 			var domdoc = e.contentDocument || e.contentWindow.document;
