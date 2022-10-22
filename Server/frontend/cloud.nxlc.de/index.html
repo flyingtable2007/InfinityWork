@@ -1,0 +1,126 @@
+ <html>
+
+<head>
+    <title>NXLC - Dateien</title>
+</head>
+
+
+
+
+<body>
+    <div id="footer">
+        <img id="IWS" src="images/InfinityWork.png" alt="test" />
+        <img id="plus" src="images/plus-64.png" alt="test" />
+        <img id="NXLCS" src="images/NXLCt.png" alt="test" />
+    </div>
+</body>
+
+</html>
+
+<style>
+    html,
+    body {
+        background-color: #477afd;
+    }
+
+    @keyframes Startone {
+        0% {
+            opacity: 0%;
+        }
+
+        20% {
+            opacity: 100%;
+        }
+
+        60% {
+            opacity: 100%;
+        }
+
+        80% {
+            opacity: 100%;
+        }
+
+        100% {
+            opacity: 0%;
+        }
+    }
+
+    @keyframes Starttwo {
+        0% {
+            opacity: 0%;
+        }
+
+        20% {
+            opacity: 0%;
+        }
+
+        40% {
+            opacity: 100%;
+        }
+
+        80% {
+            opacity: 100%;
+        }
+
+        100% {
+            opacity: 0%;
+        }
+    }
+
+    @keyframes Startthree {
+        0% {
+            opacity: 0%;
+
+        }
+
+        40% {
+            opacity: 0%;
+        }
+
+        60% {
+            opacity: 100%;
+            transform: scale(100%) translateX(0%);
+        }
+
+        100% {
+            opacity: 0%;
+            transform: scale(300%) translateX(-20%);
+        }
+    }
+
+    * {
+        margin: 0px;
+        padding: 0px;
+
+    }
+
+    #footer {
+        width: 100%;
+        bottom: 40%;
+        position: fixed;
+        opacity: 1.0;
+        text-align: center;
+    }
+
+    img {
+        display: inline-block;
+        opacity: 0%;
+    }
+
+    #IWS {
+        animation: Startone 5s;
+        animation-delay: 2.7s;
+    }
+
+    #plus {
+        transform: translate(30px, -80px);
+        animation: Starttwo 5s;
+        animation-delay: 2.7s;
+    }
+
+    #NXLCS {
+        animation: Startthree 7s;
+        animation-delay: 2s;
+    }
+
+</style>

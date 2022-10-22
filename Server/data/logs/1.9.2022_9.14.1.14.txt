@@ -1,0 +1,11 @@
+----- {"uid":-1,"gid":-1,"username":"PC","homedir":"C:\\Users\\PC","shell":null}: Sat Oct 01 2022 09:14:01 GMT+0200 (Mitteleuropäische Sommerzeit) -----
+[1.9.2022_9.14.1.18] Inited Base Modules
+[1.9.2022_9.14.1.19] Loading Database..
+[1.9.2022_9.14.1.24] Loaded Database
+[1.9.2022_9.14.1.25] Starting Server..
+[1.9.2022_9.14.1.39] Started Server
+[1.9.2022_9.14.1.39] Loading Routes
+[1.9.2022_9.14.1.39] Initing Routes..
+[1.9.2022_9.14.1.148] Inited Routes
+[1.9.2022_9.14.1.148] Loaded Routes
+[1.9.2022_9.14.1.150] Bachend Sync Server running at 5000

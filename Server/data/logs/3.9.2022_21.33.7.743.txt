@@ -1,0 +1,13 @@
+----- {"uid":-1,"gid":-1,"username":"PC","homedir":"C:\\Users\\PC","shell":null}: Mon Oct 03 2022 21:33:07 GMT+0200 (Mitteleuropäische Sommerzeit) -----
+[3.9.2022_21.33.7.747] Inited Base Modules
+[3.9.2022_21.33.7.748] Loading Database..
+[3.9.2022_21.33.7.754] Loaded Database
+[3.9.2022_21.33.7.754] Starting Server..
+[3.9.2022_21.33.7.765] Started Server
+[3.9.2022_21.33.7.765] Loading Routes
+[3.9.2022_21.33.7.766] Initing Routes..
+[3.9.2022_21.33.7.846] Inited Routes
+[3.9.2022_21.33.7.846] Loaded Routes
+[3.9.2022_21.33.7.848] Init Email Server..
+[3.9.2022_21.33.7.851] Inited Email Server
+[3.9.2022_21.33.7.853] Bachend Sync Server running at 5000

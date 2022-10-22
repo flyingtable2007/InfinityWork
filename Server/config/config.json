@@ -1,0 +1,30 @@
+{
+    "log": {
+	    "console_output": true	
+	},
+	"server": {
+		"http": {
+		    "port": 80
+		},
+		"https": {
+		    "port": 443
+		}
+	},
+	"frontend": "/frontend/",
+	"backend_server_list": [
+	
+    ],
+    "own_server_ip": "localhost",
+    "backend_server_sync_port": 5000,
+    "domain": "nxlc.de",
+    "user_permissions": {
+		"DEFAULT": 1,
+		"support": 2,
+		"game": 4,
+		"server_info": 8,
+		"server_Control": 16,
+		"info_user": 32,
+		"update_user": 64,
+		"change_admin_permission": 128
+	}
+}

@@ -1,0 +1,811 @@
+<html lang="de">
+	<head>
+	    <meta charset="utf-8"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="description" content="Infinity Work Online! Arbeiten Sie ganz einfach online, von jedem Gerät aus. "/>
+	    <meta name="keywords" content="Netzwerk, Chat, Upload, Kommunikation, einfach, schnell"/>
+	    <meta name="author" content="Lars und Tilo" />
+        <meta name="copyright" content="Tilo Behnke" />
+        <meta name="robots" content="index,follow" />
+        <meta http-equiv="cache-control" content="cache"/>
+        <title>InfinityWork</title>
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+        <script src="script/main.js"></script>
+        <script src="script/email.js"></script>
+        <script src="script/cloud.js"></script>
+        <script src="script/chats.js"></script>
+        <script src="script/upload.js"></script>
+        <script src="script/game.js"></script>
+	</head>
+	
+	<body style="display: none; ">
+		<div class="menu" onclick="close_app(); ">
+			<a href="#" style="position: absolute; " onclick="close_app(); ">
+			    <img class="logo" alt="Infinitywork" src="/images/InfinityWork.png" style="cursor: grab; " onclick="close_app(); ">
+			</a>
+			<div style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; ">
+			    <div style="width: 300px; height: 100%; display: flex; justify-content: center; align-items: center;">
+					<h1>InfinityWork</h1>
+			    </div>
+			</div>
+			<div class="center" style="position: relative; float: right; height: 100%; width: 200px; display: flex; justify-content: center; align-items: center; cursor: grab; ">
+			  <div id="cloud"></div>
+			</div>
+		</div>
+		<div style="position: fixed; top: 140px; left: 0px; right: 0px; bottom: 60px; display: flex; justify-content: space-around; align-items: center;">
+			 <div id="start_menu_window" style="position: fixed; top: 100px; left: 0px; right: 0px; bottom: 0px; transition: all 1s; overflow-x: hidden; overflow-y: scroll; ">
+				<section style="height: 90%; ">
+					<div style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; ">
+					    <div style="width: 70%; min-width: 1000px; max-width: 100%; height: 500px;  position: relative; ">
+					        <div style="position: absolute; top: 0px; bottom: 0px; left: 0px; width: 500px; ">
+					            <img style="height: 100%; width: 100%; border-radius: 50px; " src="/images/laptop.jpg" alt="Bild" >
+					        </div>
+					        <div style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 500px; color: white; ">
+								<div style="width: 100%; height: 95%; display: flex; justify-content: center; align-items: center; ">
+									<div style="width: 80%; ">
+							            <h2 style="font-size: 44px; text-align: center; ">Einfach Online Arbeiten</h2>
+							            <p style="font-size: 22px; text-align: center;  ">Das Ziel von InfinityWork ist es, das Arbeiten online im Browser möglichst einfach zu machen. Dazu bieten wir verschiedene nützliche Funktionen und Werkzeige an. Melden Sie sich Jetzt an oder erstellen Sie ein kostenloses Konto.</p>
+							            <div style="width: 100%; height: 150px;  display: flex; flex-flow: row wrap; justify-content: space-around; margin-top: 40px; ">
+								            <button class="home_page_login_buttons" onclick="open_popup('popup_login'); ">Anmelden</button>
+						                    <button class="home_page_login_buttons" onclick="open_popup('popup_register'); ">Konto erstellen</button>
+						                </div>
+					                </div>
+				                </div>
+					        </div>
+					    </div>
+					</div>
+			    </section>
+			    <section style="margin-top: 10%; height: 100%; ">
+					<div style="height: 100%; width: 80%; margin-left: 10%; ">
+						<div style="height: 100%; width: 50%; display: flex; justify-content: center; align-items: center; float: left; ">
+						     <iframe src="https://discord.com/widget?id=811146335058264085&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+						</div>
+				        <div style="height: 100%; width: 50%; display: flex; justify-content: center; align-items: center; float: right; ">
+						     <div style="width: 80%; height: 50%; text-align: center; ">
+						         <h2 style="font-size: 30px; ">Fragen & Hilfe</h2>
+						         <p style="font-size: 20px; ">Treten Sie gerne unseren Discord Server bei, wenn Sie Fragen zu InfinityWork haben oder Hilfe brauchen. Auf Unserem Discord Server bleiben Sie auch immer über neue Updates und Funktionen bei InfinityWork informiert. Treten Sie einfach über den Link links bei. </p>
+						     </div>
+						</div>
+					</div>
+			    </section>
+			    <section style="margin-top: 10%; height: 100%; ">
+					<div style="height: 100%; width: 80%; margin-left: 10%; text-align: center; ">
+						<h2 style="font-size: 34px; ">Unbegrenzte Email Postfächer!</h2>
+						<p style="font-size: 20px; ">Mit InfinityWork können Sie für sehr wenig Geld so viele "@nxlc.de"-Postfächer erstellen wie Sie wollen. Sie können unbegrenzt große Dateien verschicken und Ihr maximaler Email Speicherplatz beträgt 50GB. Starten Sie jetzt mit der Erstellung eines Kontos. Bei Fragen oder Problemen können Sie sich gerne an uns wenden, oder auch unserem Discord Sevrer für mehr Informationen beitreten. </p>
+						<div style="width: 100%; height: 150px;  display: flex; flex-flow: row wrap; justify-content: space-around; margin-top: 40px; ">
+		                    <button class="home_page_login_buttons" onclick="open_popup('popup_register'); ">Konto erstellen</button>
+		                </div>
+					</div>
+			    </section>
+			    <section style="margin-top: 200px; ">
+			        <div style="width: 100%; height: 500px; text-align: center; ">
+				        <p><a style="text-decoration: underline; text-decoration-color: blue; cursor: grab; font-size: 18px; " onclick="open_popup('popup_imprint');">Impressum</a></p>
+				        <p><a style="text-decoration: underline; text-decoration-color: blue; cursor: grab; font-size: 18px; " onclick="open_popup('popup_datenschutz');">Datenschutzerklärung</a></p>
+				        <p><a style="text-decoration: underline; text-decoration-color: blue; cursor: grab; font-size: 18px; " onclick="open_popup('popup_about_us');">Über Uns</a></p>
+			        </div>
+			    </section>
+		    </div>
+		    <div class="Text" id="logged_in_menu_window" style="display: none; opacity: 0; transition: all 1s; ">
+			    <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; text-align: center; overflow-x: hidden; overflow-y: auto; font-size: 16px; display: flex; flex-wrap: wrap; ">
+					<div class="menu_item" onclick="start_email_app(); " id="menu_item_email">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/email.png" style="height: 70px; width: 70px; ">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Email Postfach
+			            </div>
+			        </div>
+			        <div class="menu_item" onclick="start_cloud_app(); " id="menu_item_cloud">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/NXLC.png" style="height: 65px; width: 65px; ">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Next Level Cloud
+			            </div>
+			        </div>
+			        <div class="menu_item" onclick="open_popup('popup_chat');" id="menu_item_chats">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/chat.png" style="height: 80px; width: 80px; ">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Diskussion
+			            </div>
+			        </div>
+			        <div class="menu_item" onclick="start_game_app();" id="menu_item_game">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/game.png" style="height: 50px; width: 50px; ">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Infinity World
+			            </div>
+			        </div>
+			        <div class="menu_item" onclick="open_popup('popup_support');" id="menu_item_support">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/help.png" style="height: 70px; width: 70px; ">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Hilfe
+			            </div>
+			        </div>
+			        <div class="menu_item" onclick="open_popup('popup_spend', '300px');" id="menu_item_spend">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/spend.png" style="height: 70px; width: 70px; ">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Spenden
+			            </div>
+			        </div>
+			        <div class="menu_item" onclick="logout(); ">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/logout.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Abmelden
+			            </div>
+			        </div>
+			        <div class="menu_item" id="menu_item_admin_supporter">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Support Anfragen
+			            </div>
+			        </div>
+			        <div class="menu_item" id="menu_item_admin_users">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Benutzerverwaltung
+			            </div>
+			        </div>
+			        <div class="menu_item" id="menu_item_admin_servers">
+			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                <img src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+			            </div>
+			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+			                Serververwaltung
+			            </div>
+			        </div>
+			    </div>
+	        </div>
+        </div>
+        <div id="popups_container" style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; pointer-events: none; display: flex; justify-content: center; align-items: center; z-index: 1000; " onclick="close_popup(); ">
+           <div class="popup" id="popup_imprint" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+			   <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: auto; font-size: 12px; ">
+				   <h2 style="text-align: center; font-size: 18px; ">InfinityWork | Impressum</h2>
+		           Angaben gem. § 5 TMG:<br><br>
+			       <a style="float: right; margin-right: 30px; " href="mailto:support@nxlc.de">support@nxlc.de</a>
+		           Tilo Behnke<br>
+		           +49 157/52250315<br>
+		           Berliner Ring 51<br>
+		           50321, Brühl<br>
+		           <h2>verantworliche Entwickler</h2>
+		           <h3>Hauptentwickler</h3>
+		           <p>Hauptverantwortlich für Website, Anwendung und alles dazugehörige ist Tilo Behnke.</p>
+		           <ul>
+		               <li>Email: support@nxlc.de</li>
+		               <li>Telf.: 015752250315</li>
+		           </ul>
+		           <h3>Mitverantvortlich für Homepage und Anwendung sind:</h3>
+		           <ul>
+		                <li>Lars ( <a href="mailto:lars@nxlc.de">lars@nxlc.de</a> )</li>
+		           </ul>
+		           <h4>Weitere Personen mit dem Recht zur Bearbeitung von Website und Anwendung:</h4>
+		           <ul>
+					    <li>Ivo ( <a href="mailto:ivo@nxlc.de">ivo@nxlc.de</a> )</li>
+					    <li>Florian</li>
+					    <li>Marvin</li>
+					    <li>Silas</li>
+					    <li>Atal ( <a href="mailto:atal@nxlc.de">atal@nxlc.de</a> )</li>
+				   </ul>
+		           <h2>Haftungsausschluss</h2>
+		           <h3>Inhalte</h3>
+		           <p>Alle Inhalte unseres Internetauftritts wurden mit größter Sorgfalt und nach bestem Gewissen erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+	           	   Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntniserlangung einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von den o.g. Rechtsverletzungen werden wir diese Inhalte unverzüglich entfernen.</p>
+		           <h3>Externe Links</h3>
+		           <p>Unsere Webseite enthält Links auf externe Webseiten Dritter. Auf die Inhalte dieser direkt oder indirekt verlinkten Webseiten haben wir keinen Einfluss. Daher können wir für die „externen Links“ auch keine Gewähr auf Richtigkeit der Inhalte übernehmen. Für die Inhalte der externen Links sind die jeweilige Anbieter oder Betreiber (Urheber) der Seiten verantwortlich.
+			           Die externen Links wurden zum Zeitpunkt der Linksetzung auf eventuelle Rechtsverstöße überprüft und waren im Zeitpunkt der Linksetzung frei von rechtswidrigen Inhalten. Eine ständige inhaltliche Überprüfung der externen Links ist ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht möglich. Bei direkten oder indirekten Verlinkungen auf die Webseiten Dritter, die außerhalb unseres Verantwortungsbereichs liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall nur bestehen, wenn wir von den Inhalten Kenntnis erlangen und es uns technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern.
+			           Diese Haftungsausschlusserklärung gilt auch innerhalb des eigenen Internetauftrittes „Name Ihrer Domain“ gesetzten Links und Verweise von Fragestellern, Blogeinträgern, Gästen des Diskussionsforums. Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargestellten Informationen entstehen, haftet allein der Diensteanbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.
+			           Werden uns Rechtsverletzungen bekannt, werden die externen Links durch uns unverzüglich entfernt.
+		           </p>
+		           <h3>Urheberrecht</h3>
+		           <p>Die auf unserer Webseite veröffentlichen Inhalte und Werke unterliegen dem deutschen Urheberrecht (http://www.gesetze-im-internet.de/bundesrecht/urhg/gesamt.pdf) . Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung des geistigen Eigentums in ideeller und materieller Sicht des Urhebers außerhalb der Grenzen des Urheberrechtes bedürfen der vorherigen schriftlichen Zustimmung des jeweiligen Urhebers i.S.d. Urhebergesetzes (http://www.gesetze-im-internet.de/bundesrecht/urhg/gesamt.pdf ). Downloads und Kopien dieser Seite sind nur für den privaten und nicht kommerziellen Gebrauch erlaubt. Sind die Inhalte auf unserer Webseite nicht von uns erstellt wurden, sind die Urheberrechte Dritter zu beachten. Die Inhalte Dritter werden als solche kenntlich gemacht. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte unverzüglich entfernen.</p>
+		           <p>Dieses Impressum wurde freundlicherweise von jurarat.de zur Verfügung gestellt.</p>
+	           </div>
+           </div>
+           <div class="popup" id="popup_datenschutz" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+			   <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: auto; font-size: 12px; ">
+				  <h2 style="text-align: center; font-size: 18px; ">InfinityWork | Datenschutz</h2>
+		          <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
+		          <p>Tilo Behnke</p>
+		          <h2>Ihre Betroffenenrechte</h2>
+		          <p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:</p>
+		          <ul>
+		            <li>Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung (Art. 15 DSGVO),</li>
+		            <li>Berichtigung unrichtiger personenbezogener Daten (Art. 16 DSGVO),</li>
+		            <li>Löschung Ihrer bei uns gespeicherten Daten (Art. 17 DSGVO),</li>
+		            <li>Einschränkung der Datenverarbeitung, sofern wir Ihre Daten aufgrund gesetzlicher Pflichten noch nicht löschen dürfen (Art. 18 DSGVO),</li>
+		            <li>Widerspruch gegen die Verarbeitung Ihrer Daten bei uns (Art. 21 DSGVO) und</li>
+		            <li>Datenübertragbarkeit, sofern Sie in die Datenverarbeitung eingewilligt haben oder einen Vertrag mit uns abgeschlossen haben (Art. 20 DSGVO).</li>
+		          </ul>
+		          <p>Sofern Sie uns eine Einwilligung erteilt haben, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+		          <p>Sie können sich jederzeit mit einer Beschwerde an eine Aufsichtsbehörde wenden, z. B. an die zuständige Aufsichtsbehörde des Bundeslands Ihres Wohnsitzes oder an die für uns als verantwortliche Stelle zuständige Behörde.</p>
+		          <p>Eine Liste der Aufsichtsbehörden (für den nichtöffentlichen Bereich) mit Anschrift finden Sie unter: <a href="https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html" target="_blank" rel="noopener nofollow">https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html</a>.
+		          </p>
+		          <p></p>
+		          <h2>Erfassung allgemeiner Informationen beim Besuch unserer Website</h2>
+		          <h3>Art und Zweck der Verarbeitung:</h3>
+		          <p>Wenn Sie auf unsere Website zugreifen, d.h., wenn Sie sich nicht registrieren oder anderweitig Informationen übermitteln, werden automatisch Informationen allgemeiner Natur erfasst. Diese Informationen (Server-Logfiles) beinhalten etwa die Art des Webbrowsers, das verwendete Betriebssystem, den Domainnamen Ihres Internet-Service-Providers, Ihre IP-Adresse und ähnliches. </p>
+		          <p>Sie werden insbesondere zu folgenden Zwecken verarbeitet:</p>
+		          <ul>
+		            <li>Sicherstellung eines problemlosen Verbindungsaufbaus der Website,</li>
+		            <li>Sicherstellung einer reibungslosen Nutzung unserer Website,</li>
+		            <li>Auswertung der Systemsicherheit und -stabilität sowie</li>
+		            <li>zur Optimierung unserer Website.</li>
+		          </ul>
+		          <p>Wir verwenden Ihre Daten nicht, um Rückschlüsse auf Ihre Person zu ziehen. Informationen dieser Art werden von uns ggfs. anonymisiert statistisch ausgewertet, um unseren Internetauftritt und die dahinterstehende Technik zu optimieren. </p>
+		          <h3>Rechtsgrundlage und berechtigtes Interesse:</h3>
+		          <p>Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis unseres berechtigten Interesses an der Verbesserung der Stabilität und Funktionalität unserer Website.</p>
+		          <h3>Empfänger:</h3>
+		          <p>Empfänger der Daten sind ggf. technische Dienstleister, die für den Betrieb und die Wartung unserer Webseite als Auftragsverarbeiter tätig werden.</p>
+		          <p></p>
+		          <h3>Speicherdauer:</h3>
+		          <p>Die Daten werden gelöscht, sobald diese für den Zweck der Erhebung nicht mehr erforderlich sind. Dies ist für die Daten, die der Bereitstellung der Website dienen, grundsätzlich der Fall, wenn die jeweilige Sitzung beendet ist. </p>
+		          <p></p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung der vorgenannten personenbezogenen Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne die IP-Adresse ist jedoch der Dienst und die Funktionsfähigkeit unserer Website nicht gewährleistet. Zudem können einzelne Dienste und Services nicht verfügbar oder eingeschränkt sein. Aus diesem Grund ist ein Widerspruch ausgeschlossen. </p>
+		          <p></p>
+		          <h2>Cookies</h2>
+		          <p>Wie viele andere Webseiten verwenden wir auch so genannte „Cookies“. Bei Cookies handelt es sich um kleine Textdateien, die auf Ihrem Endgerät (Laptop, Tablet, Smartphone o.ä.) gespeichert werden, wenn Sie unsere Webseite besuchen. </p>
+		          <p>Sie können Sie einzelne Cookies oder den gesamten Cookie-Bestand löschen. Darüber hinaus erhalten Sie Informationen und Anleitungen, wie diese Cookies gelöscht oder deren Speicherung vorab blockiert werden können. Je nach Anbieter Ihres Browsers finden Sie die notwendigen Informationen unter den nachfolgenden Links:</p>
+		          <ul>
+		            <li>Mozilla Firefox: <a href="https://support.mozilla.org/de/kb/cookies-loeschen-daten-von-websites-entfernen" target="_blank" rel="nofollow noopener">https://support.mozilla.org/de/kb/cookies-loeschen-daten-von-websites-entfernen</a>
+		            </li>
+		            <li>Internet Explorer: <a href="https://support.microsoft.com/de-de/help/17442/windows-internet-explorer-delete-manage-cookies" target="_blank" rel="nofollow noopener">https://support.microsoft.com/de-de/help/17442/windows-internet-explorer-delete-manage-cookies</a>
+		            </li>
+		            <li>Google Chrome: <a href="https://support.google.com/accounts/answer/61416?hl=de" target="_blank" rel="nofollow noopener">https://support.google.com/accounts/answer/61416?hl=de</a>
+		            </li>
+		            <li>Opera: <a href="http://www.opera.com/de/help" target="_blank" rel="nofollow noopener">http://www.opera.com/de/help</a>
+		            </li>
+		            <li>Safari: <a href="https://support.apple.com/kb/PH17191?locale=de_DE&amp;viewlocale=de_DE" target="_blank" rel="nofollow noopener">https://support.apple.com/kb/PH17191?locale=de_DE&amp;viewlocale=de_DE</a>
+		            </li>
+		          </ul>
+		          <h3>Speicherdauer und eingesetzte Cookies:</h3>
+		          <p>Soweit Sie uns durch Ihre Browsereinstellungen oder Zustimmung die Verwendung von Cookies erlauben, können folgende Cookies auf unseren Webseiten zum Einsatz kommen:</p>
+		          <p>Das Cookie Server beschreibt den NXLC Server, auf dem die aktuelle Season läuft. Es enthält eine maximal 5 stellige Dezimalzahl. <br>Das Cookie Season enthält einen Code der aus der IP-Adresse des Benutzers und einer zufällig generierten Zahl besteht. Es besteht maximal eine Stunde lang weiter, nach beendigen der Browsersitzung.
+		          </p>
+		          <h2>Technisch notwendige Cookies </h2>
+		          <h3>Art und Zweck der Verarbeitung: </h3>
+		          <p>Wir setzen Cookies ein, um unsere Website nutzerfreundlicher zu gestalten. Einige Elemente unserer Internetseite erfordern es, dass der aufrufende Browser auch nach einem Seitenwechsel identifiziert werden kann.</p>
+		          <p>Der Zweck der Verwendung technisch notwendiger Cookies ist, die Nutzung von Websites für die Nutzer zu vereinfachen. Einige Funktionen unserer Internetseite können ohne den Einsatz von Cookies nicht angeboten werden. Für diese ist es erforderlich, dass der Browser auch nach einem Seitenwechsel wiedererkannt wird.</p>
+		          <p>Für folgende Anwendungen benötigen wir Cookies:</p>
+		          <p></p>
+		          <h3>Rechtsgrundlage und berechtigtes Interesse: </h3>
+		          <p>Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis unseres berechtigten Interesses an einer nutzerfreundlichen Gestaltung unserer Website.</p>
+		          <h3>Empfänger: </h3>
+		          <p>Empfänger der Daten sind ggf. technische Dienstleister, die für den Betrieb und die Wartung unserer Website als Auftragsverarbeiter tätig werden.</p>
+		          <p></p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung der vorgenannten personenbezogenen Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne diese Daten ist jedoch der Dienst und die Funktionsfähigkeit unserer Website nicht gewährleistet. Zudem können einzelne Dienste und Services nicht verfügbar oder eingeschränkt sein.</p>
+		          <h3>Widerspruch</h3>
+		          <p>Lesen Sie dazu die Informationen über Ihr Widerspruchsrecht nach Art. 21 DSGVO weiter unten.</p>
+		          <p></p>
+		          <h2>Registrierung auf unserer Website</h2>
+		          <h3>Art und Zweck der Verarbeitung:</h3>
+		          <p>Für die Registrierung auf unserer Website benötigen wir einige personenbezogene Daten, die über eine Eingabemaske an uns übermittelt werden. </p>
+		          <p>Zum Zeitpunkt der Registrierung werden zusätzlich folgende Daten erhoben:</p>
+		          <p>IP-Adresse, Zeit der Registrierung</p>
+		          <p>Ihre Registrierung ist für das Bereithalten bestimmter Inhalte und Leistungen auf unserer Website erforderlich.</p>
+		          <h3>Rechtsgrundlage:</h3>
+		          <p>Die Verarbeitung der bei der Registrierung eingegebenen Daten erfolgt auf Grundlage einer Einwilligung des Nutzers (Art. 6 Abs. 1 lit. a DSGVO).</p>
+		          <h3>Empfänger:</h3>
+		          <p>Empfänger der Daten sind ggf. technische Dienstleister, die für den Betrieb und die Wartung unserer Website als Auftragsverarbeiter tätig werden.</p>
+		          <p></p>
+		          <h3>Speicherdauer:</h3>
+		          <p>Daten werden in diesem Zusammenhang nur verarbeitet, solange die entsprechende Einwilligung vorliegt. </p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig, allein auf Basis Ihrer Einwilligung. Ohne die Bereitstellung Ihrer personenbezogenen Daten können wir Ihnen keinen Zugang auf unsere angebotenen Inhalte gewähren. </p>
+		          <p></p>
+		          <h2>Erbringung kostenpflichtiger Leistungen</h2>
+		          <h3>Art und Zweck der Verarbeitung:</h3>
+		          <p>Zur Erbringung kostenpflichtiger Leistungen werden von uns zusätzliche Daten erfragt, wie z.B. Zahlungsangaben, um Ihre Bestellung ausführen zu können.</p>
+		          <h3>Rechtsgrundlage:</h3>
+		          <p>Die Verarbeitung der Daten, die für den Abschluss des Vertrages erforderlich ist, basiert auf Art. 6 Abs. 1 lit. b DSGVO.</p>
+		          <h3>Empfänger:</h3>
+		          <p>Empfänger der Daten sind ggf. Auftragsverarbeiter.</p>
+		          <p></p>
+		          <h3>Speicherdauer:</h3>
+		          <p>Wir speichern diese Daten in unseren Systemen bis die gesetzlichen Aufbewahrungsfristen abgelaufen sind. Diese betragen grundsätzlich 6 oder 10 Jahre aus Gründen der ordnungsmäßigen Buchführung und steuerrechtlichen Anforderungen.</p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig. Ohne die Bereitstellung Ihrer personenbezogenen Daten können wir Ihnen keinen Zugang auf unsere angebotenen Inhalte und Leistungen gewähren.</p>
+		          <p></p>
+		          <h2>Kommentarfunktion</h2>
+		          <h3>Art und Zweck der Verarbeitung:</h3>
+		          <p>Wenn Nutzer Kommentare auf unserer Website hinterlassen, werden neben diesen Angaben auch der Zeitpunkt ihrer Erstellung und der zuvor durch den Websitebesucher gewählte Nutzername gespeichert. Dies dient unserer Sicherheit, da wir für widerrechtliche Inhalte auf unserer Webseite belangt werden können, auch wenn diese durch Benutzer erstellt wurden.</p>
+		          <h3>Rechtsgrundlage:</h3>
+		          <p>Die Verarbeitung der als Kommentar eingegebenen Daten erfolgt auf der Grundlage eines berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO).</p>
+		          <p>Durch Bereitstellung der Kommentarfunktion möchten wir Ihnen eine unkomplizierte Interaktion ermöglichen. Ihre gemachten Angaben werden zum Zwecke der Bearbeitung der Anfrage sowie für mögliche Anschlussfragen gespeichert.</p>
+		          <h3>Empfänger:</h3>
+		          <p>Empfänger der Daten sind ggf. Auftragsverarbeiter.</p>
+		          <p></p>
+		          <h3>Speicherdauer:</h3>
+		          <p>Die Daten werden gelöscht, sobald diese für den Zweck der Erhebung nicht mehr erforderlich sind. Dies ist grundsätzlich der Fall, wenn die Kommunikation mit dem Nutzer abgeschlossen ist und das Unternehmen den Umständen entnehmen kann, dass der betroffene Sachverhalt abschließend geklärt ist. Wir behalten uns die Löschung ohne Angaben von Gründen und ohne vorherige oder nachträgliche Information vor.</p>
+		          <p>Außerdem können Sie Ihren Kommentar jederzeit durch uns löschen lassen. Schreiben Sie dafür bitte eine E-Mail an den unten aufgeführten Datenschutzbeauftragten bzw. die für den Datenschutz zuständige Person und übermitteln den Link zu Ihrem Kommentar sowie zu Identifikationszwecken die bei der Erstellung des Kommentars verwendete E-Mail-Adresse.</p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig. Ohne die Bereitstellung Ihrer personenbezogenen Daten können wir Ihnen keinen Zugang zu unserer Kommentarfunktion gewähren.</p>
+		          <p></p>
+		          <h2>Newsletter</h2>
+		          <h3>Art und Zweck der Verarbeitung:</h3>
+		          <p>Für die Zustellung unseres Newsletters erheben wir personenbezogene Daten, die über eine Eingabemaske an uns übermittelt werden.</p>
+		          <p>Für eine wirksame Registrierung benötigen wir eine valide E-Mail-Adresse. Um zu überprüfen, dass eine Anmeldung tatsächlich durch den Inhaber einer E-Mail-Adresse erfolgt, setzen wir das „Double-Opt-in“-Verfahren ein. Hierzu protokollieren wir die Anmeldung zum Newsletter, den Versand einer Bestätigungsmail und den Eingang der hiermit angeforderten Antwort. Weitere Daten werden nicht erhoben. </p>
+		          <h3>Rechtsgrundlage:</h3>
+		          <p>Auf Grundlage Ihrer ausdrücklich erteilten Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), übersenden wir Ihnen regelmäßig unseren Newsletter bzw. vergleichbare Informationen per E-Mail an Ihre angegebene E-Mail-Adresse. </p>
+		          <p>Die Einwilligung zur Speicherung Ihrer persönlichen Daten und ihrer Nutzung für den Newsletterversand können Sie jederzeit mit Wirkung für die Zukunft widerrufen. In jedem Newsletter findet sich dazu ein entsprechender Link. Außerdem können Sie sich jederzeit auch direkt auf dieser Website abmelden oder uns Ihren Widerruf über die am Ende dieser Datenschutzhinweise angegebene Kontaktmöglichkeit mitteilen.</p>
+		          <h3>Empfänger:</h3>
+		          <p>Empfänger der Daten sind ggf. Auftragsverarbeiter.</p>
+		          <p></p>
+		          <h3>Speicherdauer:</h3>
+		          <p>Die Daten werden in diesem Zusammenhang nur verarbeitet, solange die entsprechende Einwilligung vorliegt. Danach werden sie gelöscht.</p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig, allein auf Basis Ihrer Einwilligung. Ohne bestehende Einwilligung können wir Ihnen unseren Newsletter leider nicht zusenden.</p>
+		          <h3>Widerruf der Einwilligung:</h3>
+		          <p>Die Einwilligung zur Speicherung Ihrer persönlichen Daten und ihrer Nutzung für den Newsletterversand können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Die Abmeldung kann über den in jeder E-Mail enthaltenen Link oder beim unten aufgeführten Datenschutzbeauftragten bzw. der für den Datenschutz zuständigen Person beantragt werden. </p>
+		          <p></p>
+		          <h2>Kontaktformular</h2>
+		          <h3>Art und Zweck der Verarbeitung:</h3>
+		          <p>Die von Ihnen eingegebenen Daten werden zum Zweck der individuellen Kommunikation mit Ihnen gespeichert. Hierfür ist die Angabe einer validen E-Mail-Adresse sowie Ihres Namens erforderlich. Diese dient der Zuordnung der Anfrage und der anschließenden Beantwortung derselben. Die Angabe weiterer Daten ist optional.</p>
+		          <h3>Rechtsgrundlage:</h3>
+		          <p>Die Verarbeitung der in das Kontaktformular eingegebenen Daten erfolgt auf der Grundlage eines berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO).</p>
+		          <p>Durch Bereitstellung des Kontaktformulars möchten wir Ihnen eine unkomplizierte Kontaktaufnahme ermöglichen. Ihre gemachten Angaben werden zum Zwecke der Bearbeitung der Anfrage sowie für mögliche Anschlussfragen gespeichert.</p>
+		          <p>Sofern Sie mit uns Kontakt aufnehmen, um ein Angebot zu erfragen, erfolgt die Verarbeitung der in das Kontaktformular eingegebenen Daten zur Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).</p>
+		          <h3>Empfänger:</h3>
+		          <p>Empfänger der Daten sind ggf. Auftragsverarbeiter.</p>
+		          <p></p>
+		          <h3>Speicherdauer:</h3>
+		          <p>Daten werden spätestens 6 Monate nach Bearbeitung der Anfrage gelöscht.</p>
+		          <p>Sofern es zu einem Vertragsverhältnis kommt, unterliegen wir den gesetzlichen Aufbewahrungsfristen nach HGB und löschen Ihre Daten nach Ablauf dieser Fristen. </p>
+		          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+		          <p>Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig. Wir können Ihre Anfrage jedoch nur bearbeiten, sofern Sie uns Ihren Namen, Ihre E-Mail-Adresse und den Grund der Anfrage mitteilen.</p>
+		          <p></p>
+		          <h2>Verwendung von Scriptbibliotheken (Google Webfonts)</h2>
+		          <p>Um unsere Inhalte browserübergreifend korrekt und grafisch ansprechend darzustellen, verwenden wir auf dieser Website „Google Web Fonts“ der Google LLC (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; nachfolgend „Google“) zur Darstellung von Schriften.</p>
+		          <p>Weitere Informationen zu Google Web Fonts finden Sie unter <a href="https://developers.google.com/fonts/faq" rel="noopener nofollow" target="_blank">https://developers.google.com/fonts/faq</a> und in der Datenschutzerklärung von Google: <a href="https://www.google.com/policies/privacy/" rel="noopener nofollow" target="_blank">https://www.google.com/policies/privacy/</a>.
+		          </p>
+		          <p></p>
+		          <h2>Verwendung von Typekit-Webschriftarten von Adobe Fonts</h2>
+		          <p>Wir setzen Typekit-Webschriftarten von Adobe Fonts zur visuellen Gestaltung unserer Website ein. Adobe Fonts ist ein Dienst der Adobe Systems Software Ireland Companies (4-6 Riverwalk, Citywest Business Campus, Dublin 24, Republic of Ireland; nachfolgend „Adobe“), der uns den Zugriff auf eine Schriftartenbibliothek gewährt. </p>
+		          <p>Zur Einbindung der von uns benutzten Schriftarten muss Ihr Browser eine Verbindung zu einem Server von Adobe in den USA aufbauen und die für unsere Website benötigte Schriftart herunterladen. Adobe erhält hierdurch die Information, dass von Ihrer IP-Adresse unsere Website aufgerufen wurde. </p>
+		          <p>Weitere Informationen zu Adobe Fonts finden Sie in den Datenschutzhinweisen von Adobe Fonts, die Sie hier abrufen können: <a href="https://www.adobe.com/de/privacy/policies/adobe-fonts.html" rel="noopener nofollow" target="_blank">https://www.adobe.com/de/privacy/policies/adobe-fonts.html</a>
+		          </p>
+		          <p>Wenn Ihr Browser Web Fonts nicht unterstützt, oder Sie Ihre Einwilligung nicht erteilen, wird eine Standardschrift von Ihrem Computer genutzt.</p>
+		          <h3>Widerruf der Einwilligung:</h3>
+		          <p>Vom Anbieter wird derzeit keine Möglichkeit für einen einfachen Opt-out oder ein Blockieren der Datenübertragung angeboten. Wenn Sie eine Nachverfolgung Ihrer Aktivitäten auf unserer Website verhindern wollen, widerrufen Sie bitte im Cookie-Consent-Tool Ihre Einwilligung für die entsprechende Cookie-Kategorie oder alle technisch nicht notwendigen Cookies und Datenübertragungen. In diesem Fall können Sie unsere Website jedoch ggfs. nicht oder nur eingeschränkt nutzen.</p>
+		          <p></p>
+		          <h2>Verwendung von Google Maps</h2>
+		          <p>Auf dieser Website nutzen wir das Angebot von Google Maps. Google Maps wird von Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA (nachfolgend „Google“) betrieben. Dadurch können wir Ihnen interaktive Karten direkt in der Webseite anzeigen und ermöglichen Ihnen die komfortable Nutzung der Karten-Funktion.<br>Nähere Informationen über die Datenverarbeitung durch Google können Sie den Google-Datenschutzhinweisen entnehmen: <a href="https://policies.google.com/privacy" rel="noopener nofollow" target="_blank">https://policies.google.com/privacy</a>. Dort können Sie im Datenschutzcenter auch Ihre persönlichen Datenschutz-Einstellungen verändern.
+		          </p>
+		          <p>Ausführliche Anleitungen zur Verwaltung der eigenen Daten im Zusammenhang mit Google-Produkten finden Sie hier: <a href="https://www.dataliberation.org/" rel="noopener nofollow" target="_blank">https://www.dataliberation.org</a>
+		          </p>
+		          <p>Durch den Besuch der Website erhält Google Informationen, dass Sie die entsprechende Unterseite unserer Webseite aufgerufen haben. Dies erfolgt unabhängig davon, ob Google ein Nutzerkonto bereitstellt, über das Sie eingeloggt sind, oder ob keine Nutzerkonto besteht. Wenn Sie bei Google eingeloggt sind, werden Ihre Daten direkt Ihrem Konto zugeordnet. </p>
+		          <p>Wenn Sie die Zuordnung in Ihrem Profil bei Google nicht wünschen, müssen Sie sich vor Aktivierung des Buttons bei Google ausloggen. Google speichert Ihre Daten als Nutzungsprofile und nutzt sie für Zwecke der Werbung, Marktforschung und/oder bedarfsgerechter Gestaltung seiner Websites. Eine solche Auswertung erfolgt insbesondere (selbst für nicht eingeloggte Nutzer) zur Erbringung bedarfsgerechter Werbung und um andere Nutzer des sozialen Netzwerks über Ihre Aktivitäten auf unserer Website zu informieren. Ihnen steht ein Widerspruchsrecht zu gegen die Bildung dieser Nutzerprofile, wobei Sie sich zur Ausübung dessen an Google richten müssen. </p>
+		          <h3>Widerruf der Einwilligung:</h3>
+		          <p>Vom Anbieter wird derzeit keine Möglichkeit für einen einfachen Opt-out oder ein Blockieren der Datenübertragung angeboten. Wenn Sie eine Nachverfolgung Ihrer Aktivitäten auf unserer Website verhindern wollen, widerrufen Sie bitte im Cookie-Consent-Tool Ihre Einwilligung für die entsprechende Cookie-Kategorie oder alle technisch nicht notwendigen Cookies und Datenübertragungen. In diesem Fall können Sie unsere Website jedoch ggfs. nicht oder nur eingeschränkt nutzen.</p>
+		          <p></p>
+		          <h2>Eingebettete YouTube-Videos</h2>
+		          <p>Auf unserer Website betten wir YouTube-Videos ein. Betreiber der entsprechenden Plugins ist die YouTube, LLC, 901 Cherry Ave., San Bruno, CA 94066, USA (nachfolgend „YouTube“). Die YouTube, LLC ist einer Tochtergesellschaft der Google LLC, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA (nachfolgend „Google“). Wenn Sie eine Seite mit dem YouTube-Plugin besuchen, wird eine Verbindung zu Servern von YouTube hergestellt. Dabei wird YouTube mitgeteilt, welche Seiten Sie besuchen. Wenn Sie in Ihrem YouTube-Account eingeloggt sind, kann YouTube Ihr Surfverhalten Ihnen persönlich zuzuordnen. Dies verhindern Sie, indem Sie sich vorher aus Ihrem YouTube-Account ausloggen. </p>
+		          <p>Wird ein YouTube-Video gestartet, setzt der Anbieter Cookies ein, die Hinweise über das Nutzerverhalten sammeln. </p>
+		          <p>Weitere Informationen zu Zweck und Umfang der Datenerhebung und ihrer Verarbeitung durch YouTube erhalten Sie in den Datenschutzerklärungen des Anbieters, Dort erhalten Sie auch weitere Informationen zu Ihren diesbezüglichen Rechten und Einstellungsmöglichkeiten zum Schutze Ihrer Privatsphäre (<a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>). 
+		          </p>
+		          <h3>Widerruf der Einwilligung:</h3>
+		          <p>Vom Anbieter wird derzeit keine Möglichkeit für einen einfachen Opt-out oder ein Blockieren der Datenübertragung angeboten. Wenn Sie eine Nachverfolgung Ihrer Aktivitäten auf unserer Website verhindern wollen, widerrufen Sie bitte im Cookie-Consent-Tool Ihre Einwilligung für die entsprechende Cookie-Kategorie oder alle technisch nicht notwendigen Cookies und Datenübertragungen. In diesem Fall können Sie unsere Website jedoch ggfs. nicht oder nur eingeschränkt nutzen.</p>
+		          <p></p>
+		          <h2>SSL-Verschlüsselung</h2>
+		          <p>Um die Sicherheit Ihrer Daten bei der Übertragung zu schützen, verwenden wir dem aktuellen Stand der Technik entsprechende Verschlüsselungsverfahren (z. B. SSL) über HTTPS.</p>
+		          <p></p>
+		          <hr>
+		          <h2>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</h2>
+		          <h3>Einzelfallbezogenes Widerspruchsrecht</h3>
+		          <p>Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten, die aufgrund Art. 6 Abs. 1 lit. f DSGVO (Datenverarbeitung auf der Grundlage einer Interessenabwägung) erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmung gestütztes Profiling im Sinne von Art. 4 Nr. 4 DSGVO.</p>
+		          <p>Legen Sie Widerspruch ein, werden wir Ihre personenbezogenen Daten nicht mehr verarbeiten, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
+		          <h3>Empfänger eines Widerspruchs</h3>
+		          <p>Tilo Behnke</p>
+		          <hr>
+		          <h2>Änderung unserer Datenschutzbestimmungen</h2>
+		          <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
+		          <h2>Fragen an den Datenschutzbeauftragten</h2>
+		          <p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:</p>
+		          <p></p>
+		          <p>
+		            <em>Die Datenschutzerklärung wurde mithilfe der activeMind AG erstellt, den Experten für <a href="https://www.activemind.de/datenschutz/datenschutzbeauftragter/" target="_blank" rel="noopener">externe Datenschutzbeauftragte</a> (Version #2020-09-30).
+		            </em>
+		          </p>
+	           </div>
+           </div>
+           <div class="popup" id="popup_about_us" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+			   <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: auto; font-size: 12px; ">
+				  <h2 style="text-align: center; font-size: 18px; ">InfinityWork | Über Uns</h2>
+				  <p>Hier sollen später Informationen über InfinityWork und wichtige Neuigkeiten zu sehen sein :)</p>
+			   </div>
+		   </div>
+		   <div class="popup" id="popup_support" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+			   <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+				  <h2 style="text-align: center; font-size: 18px; ">InfinityWork | Support</h2>
+				  <p>Brauchen Sie Hilfe, zu bei einer Funktion von InfinityWork oder haben Sie Fragen? Schreiben Sie und hier Ihr Anliegen und erhalten Sie umgehend Unterstützung durch einen InfinityWork-Mitarbeiter. Wir freuen uns, wenn wir Ihnen helfen können. </p>
+				  <div class="support_form">
+				      <label for="subject">Thema</label>
+				      <input type="text" id="popup_support_subject" name="subject" placeholder="Darum geht es in Ihrem Anliegen">
+				      <label for="email">Email Addresse</label>
+				      <input type="email" id="popup_support_email" name="email" placeholder="Ihre Email, damit wir Ihnen antwortn können">
+				      <label for="popup_support_text">Ihr Anliegen</label>
+				      <textarea style="height: 200px; " id="popup_support_text" name="text" placeholder="Wie können wir Ihnen helfen?"></textarea>
+				    <p>Durch das Absenden Ihres Anliegen, erklären Sie sich damit einverstanden, dass zur Bearbeitung notwendige persönliche Daten an InfinityWork gesendet werden und dort auch gespeichert werden. </p>
+				    <input type="button" value="Absenden" onclick="support(); ">
+				  </div>
+			   </div>
+		   </div>
+		   <div class="popup" id="popup_support_success" style="background-color: lightgreen; color: black; " onclick="event.stopPropagation();">
+			   <div style="width: 90%; height: 100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+				  <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; margin-top: 34px; ">Ihre Anfrage wurde erfolgreich gesendet</h2>
+		            <p>Bitte haben Sie jetzt ein wenig Geduld. Wir werden Ihre Anfrage bearbeiten und Sie daraufhin kontakiteieren. </p>
+		            <button style="text-align: center; width: 80%; margin-left: 10%; height: 50px; background-color: blue; color: white; font-size: 18px; " onclick="close_popup(); ">Schließen</button>
+		          </div>
+			   </div>
+		   </div>
+		   <div class="popup" id="popup_chat" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+			   <div id="popup_chat_chats" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; transform: translate(0px, 0px); transition: all 1s; ">
+			       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+			           <h2 style="text-align: center; font-size: 18px; ">InfinityWork | Diskussion</h2>
+			           <p style="text-align: center; ">Tauschen Sie sich über aktuelle Themen aus. Hier ein paar beliebte Kanäle:</p>
+			           <div style="width: 100%; " id="popup_chat_list"></div>
+			       </div>
+			   </div>
+		       <div id="popup_chat_chat" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; transform: translate(100%, 0px); transition: all 1s; ">
+			        <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; position: relative; " id="chats_container">
+			            <div class="back_to_chats_button" onclick="close_chat(); ">&#8592; Zu den Chats</div>
+			        </div>
+			   </div>
+		   </div>
+		   <div class="popup" id="popup_spend" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 18px; margin-top: 55px; ">Wollen Sie uns mit einer kleinen Spende unterstützen?</h2>
+		            <p style="font-size: 14px; text-align: center; ">Wir bemühen uns InfinityWork möglichst günstig und Benutzerfreundlich zu gestalten und Benutzern zu ermöglichen so viele Funktionen wie möglich kostenlos zu nuten. Trotzdem haben wir auch Serverkosten und investieren viel Zeit in die Entwicklung von Infinity Work. Deshalb würden wir uns sehr über eine kleine Spende freuen. </p>
+		            <form action="https://www.paypal.com/donate" method="post" target="_top" style="text-align: center; ">
+					    <input type="hidden" name="hosted_button_id" value="ABAQ8ZYWRVX86" />
+					    <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Spenden mit dem PayPal-Button" />
+					    <img alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+					</form>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_login" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">InfinityWork | Anmelden</h2>
+		            <p style="font-size: 14px; text-align: center; ">Melden Sie sich hier mit Ihrem InfinityWork Konto an. Wenn Sie noch kein Konto haben, können Sie <a href="#" onclick="open_popup('popup_register'); ">hier</a> eins erstellen.</p>
+		            <div style="width: 80%; margin-left: 10%; margin-top: 50px; ">
+		                <input id="popup_login_name" type="text" placeholder="Benutzername" style="width: 100%; height: 40px; font-size: 16px; ">
+		                <input id="popup_login_password" type="password" placeholder="Passwort" style="width: 100%; height: 40px; font-size: 16px; margin-top: 50px; ">
+		                <button onclick="on_login(); " id="popup_login_button" style="width: 100%; height: 40px; font-size: 16px; margin-top: 50px; ">Anmelden</button>
+		                <div id="popup_login_info" style="width: 100%; margin-top: 30px; text-align: center; color: red; "></div>
+		            </div>
+		            <p style="margin-top: 60px; font-size: 14px; text-align: center; ">Bitte denken Sie daran: InfnityWork befindet sich noch in der Entwicklungsphase. Das heißt, dass noch nicht alles ausgiebig getestet wurde und eventuell noch ungemeldete Fehler enthalten sind. Wir bitten Sie darauf rücksicht zu nehmen und sich nicht auf InfinityWork zu verlassen. Für eventuelle Schäden, die zum Beispiel durch Siecherheitslücken oder ähnliches entstanden sind übernehmen wir keine Haftung. WIr hoffen Sie haben Verständnis und helfen uns bei der Weiterentwicklung der Anwendung, indem Sie sich bei uns melden, wenn Sie Fehler in der Anwendung oer sonstige Probleme gefunden haben, die verbessert werden sollten. Vielen Dank!</p>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_register" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">InfinityWork | Registrieren</h2>
+		            <p style="font-size: 14px; text-align: center; ">Erstellen Sie sich hier ein InfinityWork Konto. Wenn Sie bereits ein Konto haben können Sie sich <a href="#" onclick="open_popup('popup_login'); ">hier</a> anmelden.</p>
+		            <div style="width: 80%; margin-left: 10%; margin-top: 50px; ">
+		                <input id="popup_register_name" type="text" placeholder="Benutzername" style="width: 100%; height: 40px; font-size: 16px; ">
+		                <input id="popup_register_password" type="password" placeholder="Passwort" style="width: 100%; height: 40px; font-size: 16px; margin-top: 50px; ">
+		                <p style="margin-top: 32px; text-align: center; ">Mit dem Erstellen eines Kontos erklären Sie sich mit unsereren Nutzungsbedingungen einverstanden. </p>
+		                <button onclick="on_register(); " id="popup_register_button" style="width: 100%; height: 40px; font-size: 16px; ">Konto erstellen</button>
+		                <div id="popup_register_info" style="width: 100%; margin-top: 30px; text-align: center; color: red; "></div>
+		            </div>
+		            <p style="margin-top: 60px; font-size: 14px; text-align: center; ">Bitte denken Sie daran: InfnityWork befindet sich noch in der Entwicklungsphase. Das heißt, dass noch nicht alles ausgiebig getestet wurde und eventuell noch ungemeldete Fehler enthalten sind. Wir bitten Sie darauf rücksicht zu nehmen und sich nicht auf InfinityWork zu verlassen. Für eventuelle Schäden, die zum Beispiel durch Siecherheitslücken oder ähnliches entstanden sind übernehmen wir keine Haftung. WIr hoffen Sie haben Verständnis und helfen uns bei der Weiterentwicklung der Anwendung, indem Sie sich bei uns melden, wenn Sie Fehler in der Anwendung oer sonstige Probleme gefunden haben, die verbessert werden sollten. Vielen Dank!</p>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_create_email_postfach" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">InfinityWork | Email Postfach einrichten</h2>
+		            <h2 style="font-size: 26px; font-weight: small; text-align: center; background-color: blue; color: white; ">Sonderpreis: 0.00&euro;</h2>
+		            <p style="font-size: 14px; text-align: center; "></p>
+		            <div style="width: 80%; margin-left: 10%; margin-top: 50px; ">
+		                <div style="width: 100%; height: 40px; background-color: gray; "><input id="popup_create_email_postfach_email" type="text" placeholder="Wunsch Addresse" style="height: 40px; width: calc(100% - 100px); float: left; "><div style="width: 100px; height: 40px; float: right; display: flex; justify-content: center; align-items: center;">@nxlc.de</div></div>
+		                <div id="popup_create_email_postfach_info" style="width: 100%; text-align: center; color: red; "></div>
+		                <p style="margin-top: 32px;">Sie erhalten Folgendes:</p>
+		                <ol>
+		                   <li>Wunsch Email Addresse ( <span id="popup_create_email_postfach_email_preview"></span>) </li>
+		                   <li>Postfach mit unbegrenzten Speicherplatz zur gewählten Email</li>
+		                   <li>Autmatische Vertifiezierung von Eigehenden Emails auf Echtheit. </li>
+		                </ol>
+		                <p>Mit der Bestätigung diesen Schrittes erklären Sie sich damit einverstanden, dass für die Bereitstellung Ihrer Email Addresse und des dazugehörigen Postfaches notwendige persönlcihe Daten verarbeitet werden, wie Ihre aktuelle IP Addresse und Angaben, die Sie in Ihrem InfinityWork Benutzerkonto gemacht haben. </p>
+		                <p>Für Sie werden einmalig Kosten von 0.00 Euro fällig. InfinityWork behählt sich vor, diesen Preis in Zukunft ändern zu können, das heißt, dass weitere Bestellungen dieses Proktes sich eventuell preislich von dieser Unterscheiden werden können. </p
+		                <p>Laut §355 steht Ihnen ein Wiederrufsrecht zu, das heißt, dass Sie inerhalb von 2 Wochen nach Vertragsabschluss ohne Angabe von Gründen den Vertrag kündigen können und Ihr Geld von 0.00 Euro zurückfordern können. </p>
+		                <button onclick="create_email();" id="popup_register_button" style="width: 100%; height: 40px; font-size: 16px; ">Jetzt kostenfplichtig kaufen</button>
+		            </div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_email_error" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; border-bottom: 1px solid red; ">Fehler beim Senden der Email</h2>
+		            <button style="text-align: center; " onclick="open_popup('popup_write_email'); ">Zurück zum Editor</button>
+		            <p><strong>Hier Finden Sie weitere Informationen zur Feststellung der Fehlerursache:</strong></p>
+		            <div id="popup_email_error_info"></div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_email_success" style="background-color: lightgreen; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; margin-top: 34px; ">Die Email wurde erfolgreich versendet</h2>
+		            <button style="text-align: center; width: 80%; margin-left: 10%; height: 50px; background-color: blue; color: white; font-size: 18px; " onclick="close_popup(); ">Schließen</button>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_email_attachment" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">Email Anhang</h2>
+		            <p style="font-size: 18px; text-align: center; ">InfinityWork übernimmt keine Haftung für Schäden, die durch versendete Dateien entstehen. EMail Anhänge werden NICHT auf Viren oder andere Schädliche Malware geprüft. Öffnen Sie die Datei nur, wenn Sie sem Absender <span id="popup_email_attachment_email"></span> und den tätigen Mailserver <span id="popup_email_attachment_mailserver"></span> vertrauen.</p>
+		            <div id="popup_email_attachment_preview" style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; "></div>
+		            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; ">
+		                <button id="popup_email_attachment_download_button" style="height: 50px; width: 500px; margin-top: 30px; background-color: blue; color: white; font-size: 20px; cursor: grab; ">Datei auf diesem Gerät speichern</button>
+		            </div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_delete_email_confirm" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">EMail und Postfach unwiederruflich löschen?</h2>
+		            <p style="font-size: 18px; text-align: center; ">Wollen Sie das die Email Addresse <strong><span id="popup_delete_email_confirm_email"></span></strong> und das dazugehörige Postfach wirklich löschen? Dadurch sind ALLE empfangenen und gesendeten Emails samt Anhängen für immer verlohren. Es wird dadurch möglich sein, dass diese Email addresse von anderen Person registriert und genutz werden kann. Stellen Sie sicher, dass ihre Kontaktperson darüber informiert sind, damit neue Email eigentümer nicht in Ihrem Namen schreiben können oder sich sogar mithilfe es Email Postfaches bei Accounts anderer Dienste anmelden konnen.</p>
+		            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; ">
+		                <button id="popup_delete_email_confirm_button" style="height: 50px; width: 500px; margin-top: 30px; background-color: blue; color: white; font-size: 20px; cursor: grab; ">Ich verstehe die Risiken und möchte das Postfach unwiederruflich löschen</button>
+		            </div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_email_address_info" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">Postfach: <span id="popup_email_address_info_email"></span></h2>
+		            <button id="popup_email_address_info_delete_button">Postfach löschen</button>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_uploading_files" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">Dateien werden hochgeladen</h2>
+		            <p style="font-size: 18px; text-align: center; ">Bitte lassen Sie das Fenster geöffnet, während die Dateien hochgeladen werden. </p>
+		            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; ">
+		                <div id="popup_uploading_files_div" style="width: 500px; height: 500px; overflow-x: hidden; overflow-y: auto; margin-top: 30px; font-size: 30px; text-align: center; "></div>
+		            </div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_write_email" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+			   <div style="height: 95%; width: 100%; position: relative; ">
+				   <div style="height: 50px; width: 100%; "><h2 style="text-align: center; ">Email verfassen</h2></div>
+				   <div style="height: 80px; width: 100%; ">
+				       <div style="height: 100%; width: 90%; margin-left: 5%; display: flex; flex-direction: column; justify-content: space-around; align-items: stretch; ">
+		                    <div style="width: 100%; height: 38%;  display: flex; justify-content: space-between; ">
+		                        <div style="width: 48%; height: 100%; position: relative; "><div style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; "><span>Absender: </span></div><select style="position: absolute; left: 100px; right: 0px; top: 0px; bottom: 0px; " id="popup_write_email_select_sender_email"></select></div>
+		                        <div style="width: 48%; height: 100%; position: relative; "><div style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; "><span>Empfänger: </span></div><input style="position: absolute; left: 100px; right: 0px; top: 0px; bottom: 0px; " id="popup_write_email_to" type="email" placeholder="Empfänger Addresse"></div>
+		                    </div>
+		                    <div style="width: 100%; height: 38%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+		                        <div><div style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; "><span>Betreff: </span></div><input style="position: absolute; left: 100px; right: 0px; top: 0px; bottom: 0px; " id="popup_write_email_subject" type="text" placeholder="Betreff der Email"></div>
+		                    </div>
+		               </div>
+				   </div>
+				   <div style="width: 100%; height: 100px; background-color: lightgray; margin-top: 20px; ">
+				        <button onclick="Edit('bold')" title="bold"><i class="fa fa-bold"></i></button>
+					    <button onclick="Edit('italic')" title="italic"><i class="fa fa-italic"></i></button>
+					    <button onclick="Edit('underline')" title="underline"><i class="fa fa-underline"></i></button>
+					    <button onclick="Edit('strikeThrough')" title="strikeThrough"><i class="fa fa-strikethrough"></i></button>
+					    <button onclick="Edit('justifyLeft')" title="Align Left"><i class="fa fa-align-left"></i></button>
+					    <button onclick="Edit('justifyCenter')" title="Align Center"><i class="fa fa-align-center"></i></button>
+					    <button onclick="Edit('justifyFull')" title="justify"><i class="fa fa-align-justify"></i></button>
+					    <button onclick="Edit('cut')" title="cut"><i class="fa fa-cut"></i></button>
+					    <button onclick="Edit('copy')" title="Copy"><i class="fa fa-copy"></i></button>
+					    <button onclick="Edit('indent')" title="text-indent"><i class="fa fa-indent"></i></button>
+					    <button onclick="Edit('outdent')" title="text outdent"><i class="fa fa-outdent"></i></button>
+					    <button onclick="Edit('subscript')" title="subscript"><i class="fa fa-subscript"></i></button>
+					    <button onclick="Edit('superscript')" title="subscript"><i class="fa fa-superscript"></i></button>
+					    <button onclick="Edit('undo')" title="undo"><i class="fa fa-undo"></i></button>
+					    <button onclick="Edit('redo')" title="redo"><i class="fa fa-redo"></i></button>
+					    <button onclick="Edit('insertUnorderedList')" title="unordered list"><i class="fa fa-list-ul"></i></button>
+					    <button onclick="Edit('insertOrderedList')" title="ordered list"><i class="fa fa-list-ol"></i></button>
+					    <button onclick="Edit('insertParagraph')"><i class="fa fa-paragraph"></i></button>
+					    <select onchange="execVal('formatBlock',this.value)">
+					        <option value="H1">H1</option>
+					        <option value="H2">H2</option>
+					        <option value="H3">H3</option>
+					        <option value="H4">H4</option>
+					        <option value="H5">H5</option>
+					        <option value="H6">H6</option>
+					      </select>
+					    <br>
+					    <button onclick="Edit('insertHorizontalRule')" title="insert Horizontal Rule">insert Horizontal Rule</button>
+					    <button onclick="Edit('createLink',prompt('Enter a URL,http://'))"><i class="fa fa-link"></i></button>
+					    <button onclick="Edit('unlink')"><i class="fa fa-unlink"></i></button>
+					    <select onchange="execVal('fontName',this.value)">
+					        <option value="Arial">Arial</option>
+					        <option value="Comic Sans MS">Comic Sans MS</option>
+					        <option value="Courier">Courier</option>
+					        <option value="Georgia">Georgia</option>
+					        <option value="Tahoma">Tahoma</option>
+					        <option value="Times New Roman">Times New Roman</option>
+					        <option value="Verdana">Verdana</option>
+					      </select>
+					    <select onchange="execVal('fontSize',this.value)" title="font size">
+					        <option value="1">1</option>
+					        <option value="2">2</option>
+					        <option value="3">3</option>
+					        <option value="4">4</option>
+					        <option value="5">5</option>
+					        <option value="6">6</option>
+					        <option value="7">7</option>
+					    </select>Font Color<input type="color" onchange="execVal('foreColor',this.value)" /> Highlight<input type="color" onchange="execVal('hiliteColor',this.value)" />
+					    <input type="file" style="display: none; " onchange="add_file_to_email(); " id="popup_write_email_upload_file" multiple>
+					    <button onclick="document.getElementById('popup_write_email_upload_file').click(); ">Datei anhängen</button>
+					    <script>
+							function Edit(command) {
+							    document.execCommand(command, false, null);
+							}
+							function execVal(command, value) {
+							    document.execCommand(command, false, value);
+							}
+					    </script>
+				   </div>
+				   <div style="position: absolute; top: 250px; left: 0px; right: 0px; bottom: 80px; background-color: white; border: 1px solid gray; " id="popup_write_email_text" contenteditable="true"></div>
+				   <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 50px; ">
+					   <div style="height: 100%; width: calc(100% - 140px); float: left; overflow-x: hidden; overflow-y: auto; " id="popup_write_email_added_files"></div>
+				       <button id="popup_write_email_button" onclick="send_email(); " style="float: right; height: 100%; margin-right: 20px; width: 100px; background-color: blue; color: white; font-size: 20px; ">Senden</button>
+				   </div>
+			   </div>
+		   </div>
+        </div>
+        <div class="app" id="app_email">
+			<div style="height: 100%; width: 100%; position: relative; ">
+			    <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; width: 220px; border-right: 1px solid gray; ">
+			        <div style="width: 100%; height: 60px; display: flex; justify-content: center; align-items: center; "><button style="height: 30px; width: 130px; " onclick="open_popup('popup_write_email');">Email verfassen</button></div>
+			        <div style="width: 100%; border-top: 1px solid gray; text-align: center; color: black; ">
+						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
+						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_posteingang');">
+						        <img src="/images/posteingang.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Posteingang (<span id="posteingang_count"></span>)</div>
+						    </div>
+						</div>
+						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
+						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_postausgang');">
+						        <img src="/images/postausgang.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Postausgang (<span id="postausgang_count"></span>)</div>
+						    </div>
+						</div>
+						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
+						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_spam');">
+						        <img src="/images/spam.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Spam (<span id="spam_count"></span>)</div>
+						    </div>
+						</div>
+						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
+						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_deleted');">
+						        <img src="/images/delete.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Papierkorb (<span id="deleted_count"></span>)</div>
+						    </div>
+						</div>
+				    </div>
+				    <div style="width: 100%; margin-top: 15px; border-top: 1px solid gray; text-align: center; color: black; ">
+						<ul id="app_email_addresses"></ul>
+				        <u><div style="height: 50px; width: 100%;  display: flex; justify-content: center; align-items: center; color: black; cursor: grab; " onclick="open_popup('popup_create_email_postfach'); ">+ Neue Email Addresse</div></u>
+				    </div>
+			    </div>
+			    <div style="position: absolute; top: 0px; left: 220px; bottom: 0px; width: 380px; border-right: 1px solid gray; color: black; ">
+					<div style="position: relative; height: 100%; width: 100%; ">
+						<div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; transition: all 0.2s; " class="email_box_menu" id="email_box_menu_posteingang">
+							<div style="width: 100%; height: 100%; position: relative; ">
+						        <div style="position: absolute; top: 0px; left: 0px; right: 0px; height: 25px; border-bottom: 1px solid gray; display: flex; justify-content: center; align-items: center; ">Posteingang</div> 
+						        <div style="position: absolute; top: 25px; left: 0px: right: 0px; width: 100%; bottom: 0px; overflow-x: hidden; overflow-y: auto; " class="no_scrollbar" id="app_email_posteingang"></div>
+					        </div>
+				        </div>
+				        <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; transition: all 0.2s; opacity: 0; display: none; " class="email_box_menu" id="email_box_menu_postausgang">
+							<div style="width: 100%; height: 100%; position: relative; ">
+						        <div style="position: absolute; top: 0px; left: 0px; right: 0px; height: 25px; border-bottom: 1px solid gray; display: flex; justify-content: center; align-items: center; ">Postausgang</div> 
+						        <div style="position: absolute; top: 25px; left: 0px: right: 0px; width: 100%; bottom: 0px; overflow-x: hidden; overflow-y: auto; " class="no_scrollbar" id="app_email_postausgang"></div>
+					        </div>
+				        </div>
+				        <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; transition: all 0.2s; opacity: 0; display: none; " class="email_box_menu" id="email_box_menu_spam">
+							<div style="width: 100%; height: 100%; position: relative; ">
+						        <div style="position: absolute; top: 0px; left: 0px; right: 0px; height: 25px; border-bottom: 1px solid gray; display: flex; justify-content: center; align-items: center; ">Spam</div> 
+						        <div style="position: absolute; top: 25px; left: 0px: right: 0px; width: 100%; bottom: 0px; overflow-x: hidden; overflow-y: auto; " class="no_scrollbar" id="app_email_spam"></div>
+					        </div>
+				        </div>
+				        <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; transition: all 0.2s; opacity: 0; display: none; " class="email_box_menu" id="email_box_menu_deleted">
+							<div style="width: 100%; height: 100%; position: relative; ">
+						        <div style="position: absolute; top: 0px; left: 0px; right: 0px; height: 25px; border-bottom: 1px solid gray; display: flex; justify-content: center; align-items: center; ">Papierkorb</div> 
+						        <div style="position: absolute; top: 25px; left: 0px: right: 0px; width: 100%; bottom: 0px; overflow-x: hidden; overflow-y: auto; " class="no_scrollbar" id="app_email_deleted"></div>
+					        </div>
+				        </div>
+			        </div>
+			    </div>
+			    <div style="position: absolute; top: 0px; left: 600px; bottom: 0px; right: 0px; ">
+			        <div style="width: 100%; height: 100%; position: relative; ">
+						<div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; transition: all 0.2s; display: none; opacity: 0; " id="app_email_email_preview_1">
+						    <div style="height: 100%; width: 100%; position: relative; ">
+						        <div style="position: absolute; top: 0px; left: 0px; right: 200px; height: 80px; border-bottom: 1px solid gray; color: black; ">
+					                <div style="height: 100%; margin-left: 30px; display: flex; flex-direction: column; justify-content: space-around; align-items: stretch; ">
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><strong>Betreff: </strong><span style="position: absolute; left: 100px; " id="app_email_email_preview_1_subject"></span></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><strong>Absender: </strong><span style="position: absolute; left: 100px; " id="app_email_email_preview_1_from"></span></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><strong>Empfänger: </strong><span style="position: absolute; left: 100px; " id="app_email_email_preview_1_to"></span></div>
+					                    </div>
+					                </div>
+					            </div>
+					            <div style="position: absolute; top: 0px; right: 20px; height: 80px; width: 200px; border-bottom: 1px solid gray; color: black; ">
+					                <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: stretch; ">
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><button style="width: 100%; " id="app_email_email_preview_1_answer_button">Antworten</button></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><button style="width: 100%; " id="app_email_email_preview_1_weiterleiten_button">Weiterleiten</button></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><button style="width: 100%; background-color: red; " id="app_email_email_preview_1_delete_button">&#215; Löschen</button></div>
+					                    </div>
+					                </div>
+					            </div>
+					            <div style="position: absolute; top: 80px; left: 0px; right: 0px; height: 30px; border-bottom: 1px solid gray; color: black; display: flex; justify-content: center; align-items: center; " id="app_email_email_preview_1_attachments"></div>
+					            <div style="position: absolute; top: 110px; left: 0px; right: 0px; bottom: 0px; " id="app_email_email_preview_1_content"></div>
+						    </div>
+						</div>
+			            <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; transition: all 0.2s; display: none; opacity: 0; " id="app_email_email_preview_2">
+						    <div style="height: 100%; width: 100%; position: relative; ">
+					            <div style="position: absolute; top: 0px; left: 0px; right: 200px; height: 80px; border-bottom: 1px solid gray; color: black; ">
+					                <div style="height: 100%; margin-left: 30px; display: flex; flex-direction: column; justify-content: space-around; align-items: stretch; ">
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><strong>Betreff: </strong><span style="position: absolute; left: 100px; " id="app_email_email_preview_2_subject"></span></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><strong>Absender: </strong><span style="position: absolute; left: 100px; " id="app_email_email_preview_2_from"></span></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><strong>Empfänger: </strong><span style="position: absolute; left: 100px; " id="app_email_email_preview_2_to"></span></div>
+					                    </div>
+					                </div>
+					            </div>
+					            <div style="position: absolute; top: 0px; right: 20px; height: 80px; width: 200px; border-bottom: 1px solid gray; color: black; ">
+					                <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: stretch; ">
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><button style="width: 100%; " id="app_email_email_preview_2_answer_button">Antworten</button></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><button style="width: 100%; " id="app_email_email_preview_2_weiterleiten_button">Weiterleiten</button></div>
+					                    </div>
+					                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: stretch; position: relative; ">
+					                        <div><button style="width: 100%; background-color: red; " id="app_email_email_preview_2_delete_button">&#215; Löschen</button></div>
+					                    </div>
+					                </div>
+					            </div>
+					            <div style="position: absolute; top: 80px; left: 0px; right: 0px; height: 30px; border-bottom: 1px solid gray; color: black; display: flex; justify-content: center; align-items: center; " id="app_email_email_preview_2_attachments"></div>
+					            <div style="position: absolute; top: 110px; left: 0px; right: 0px; bottom: 0px; " id="app_email_email_preview_2_content"></div>
+					        </div>
+						</div>
+			        </div>
+			    </div>
+			</div>
+        </div>
+        <div class="app" id="app_cloud" style="overflow: hidden; ">
+            <div style="height: 100%; width: 100%; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                <div style="width: 400px; height: 500px; text-align: center; color: black; ">
+                    <h2 style="font-size: 40px; ">In der Entwicklung</h2>
+                    <p style="font-size: 20px; ">Next Level Cloud wird gerade von Lars entwicklelt. Freuen Sie sich auf eine krasse Cloud App. Für mehr Informationen können Sie auch gerne unserem Discord Server beitreten: <a href="https://discord.gg/XsCferjD">https://discord.gg/XsCferjD</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="app" id="app_game" style="overflow: hidden; ">
+			<div style="height: 100%; width: 100%; position: relative; overflow: hidden; ">
+	            <h2 style="font-size: 30px; margin-top: 100px; text-align: center; " id="app_game_loading_text">Einen Moment Bitte..</h1>
+	            <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;  display: flex; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: all 1s; " id="app_game_loading_canvas">
+	                <div style="position: absolute; bottom: 0px; left: 0px; right: 0px; height: 300px; display: flex; justify-content: center; align-items: center; font-size: 30px; color: white; " id="app_game_loading_canvas_text">Wird geladen..</div>
+	            </div>
+	            <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;  display: flex; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: all 1s; " id="app_game_canvas"></div>
+	        </div>
+        </div>
+	</body>
+</html>

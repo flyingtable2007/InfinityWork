@@ -1,0 +1,234 @@
+@keyframes Entranceone {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@keyframes Entrancetwo {
+  0% {font-size: 100px; transform: translateY(-20%)}
+  100% {color: white; font-size: 50px;}
+}    
+html, body {
+  background-color: #488FFF;
+  color: white;
+  font-family: Helvetica;
+  animation: Entranceone 3s;
+  scroll-behavior: smooth;
+}
+h1 {
+  text-align: center;
+  animation: Entrancetwo 3s;
+  font-size: 50px;
+  font-family: Helvetica;
+}
+.Text {
+  position: relative;
+  width: 60%;
+  height: 80%;
+}
+.logo {
+  left: 5px;
+  top: 0px;
+  height: 90px;
+}
+.home_page_login_buttons {
+  background-color: #488FFF;
+  border: 2px;
+  border-color: white;
+  border-style: solid;
+  border-radius: 7.5px;
+  margin-top: 30px;
+  height: 40px;
+  width: 40%;
+  font-size: 16px;
+  transition: all 1s;
+  color: white;
+}
+
+.home_page_login_buttons:hover {
+  color: lightgreen;
+  border-color: lightgreen;
+}
+
+.menu {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right:0px;
+  height: 90px;
+  z-index: 100;
+  background-color: #277AFD;
+  box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
+  -webkit-box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
+  -moz-box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
+  border-bottom: 1px solid blue;
+}
+
+#cloud {
+  background: rgba(255, 255, 255);
+  width: 150px; 
+  height: 50px;
+  border-radius: 75px;	
+  box-shadow: 5px 5px rgba(0,0,0,0.2);
+  animation: move 3s infinite;
+  transform: translate(0, 25%) scale(0.5);
+}
+
+#cloud:after {
+  content: '';
+  background: rgba(255, 255, 255);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  top: -25px;
+  left: 25px;
+}
+
+#cloud:before {
+  content: '';
+  background: rgba(255, 255, 255);
+  position: absolute;
+  width: 85px;
+  height: 75px;
+  border-radius: 50%;
+  top: -45px;
+  right: 20px;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0, 25%) scale(0.5);
+  }
+  50% {
+    transform: translate(-20px, 25%) scale(0.5);
+  }
+}
+
+.menu_item {
+  float: left; 
+  height: 120px;
+  width: 100px;
+  margin: 10px; 
+  background-color: lightred;
+  transition: all 1s;
+  
+}
+.menu_item:hover {
+  transform: scale(0.9);
+}
+.popup {
+  position: absolute;
+  overflow: hidden; 
+  width: 40%;
+  min-width: 550px;
+  max-width: 90%;
+  height: 0px;
+  transition: height 1s;
+  box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
+  -webkit-box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
+  -moz-box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
+  border-radius: 30px;
+  pointer-events: auto;
+}
+.support_form > input[type=text], .support_form > input[type=email], .support_form > textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none; 
+}
+
+.support_form > input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.support_form > input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.support_form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+.popup_chat_menu {
+  width: 100%; 
+  height: 50px; 
+  border-top: 1px solid lightgray; 
+  border-bottom: 1px solid lightgray; 
+  margin-top: 5px;
+  transition: all 0.5s;
+  cursor: grab;
+  position: relative;
+}
+.popup_chat_menu:hover {
+  transform: scale(0.985);
+}
+.popup_chat_chat_inner {
+  position: relative;
+  height: calc(100% - 20px);
+  width: 100%;
+  display: none;
+}
+.back_to_chats_button {
+   position: absolute; 
+   top: 20px; 
+   left: 0px; 
+   height: 30px; 
+   width: 120px; 
+   font-size: 14px;
+   transition: all 0.5s;
+   cursor: gray;
+   z-index: 10;
+}
+.back_to_chats_button:hover {
+   transform: scale(0.99);
+}
+.no_scrollbar {
+   scrollbar-width: none;
+   -ms-overflow-style: none;
+}
+.no_scrollbar::-webkit-scrollbar {
+  background: transparent;
+  width: 0px;
+  display:none;  
+}
+.app {
+    position: fixed;
+    top: 91px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px; 
+    opacity: 0;
+    display: none;
+    transition: all 1s;
+    z-index: 5;
+    background-color: lightgray;
+}
+.on_hover_right {
+    transition: all 0.8s;
+}
+.on_hover_right:hover {
+    transform: translate(5px, 0px) scale(0.99);
+}
+.on_hover_down {
+    transition: all 0.8s;
+}
+.on_hover_down:hover {
+    transform: translate(0px, 3px) scale(0.95);
+}
+.on_hover_press {
+    transition: all 0.8s;
+}
+.on_hover_press:hover {
+    transform: scale(0.96);
+}

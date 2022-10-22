@@ -1,0 +1,14 @@
+----- {"uid":-1,"gid":-1,"username":"PC","homedir":"C:\\Users\\PC","shell":null}: Mon Oct 03 2022 21:31:51 GMT+0200 (Mitteleuropäische Sommerzeit) -----
+[3.9.2022_21.31.51.703] Inited Base Modules
+[3.9.2022_21.31.51.705] Loading Database..
+[3.9.2022_21.31.51.714] Loaded Database
+[3.9.2022_21.31.51.715] Starting Server..
+[3.9.2022_21.31.51.738] Started Server
+[3.9.2022_21.31.51.739] Loading Routes
+[3.9.2022_21.31.51.741] Initing Routes..
+[3.9.2022_21.31.51.880] Inited Routes
+[3.9.2022_21.31.51.880] Loaded Routes
+[3.9.2022_21.31.51.881] Init Email Server..
+[3.9.2022_21.31.51.884] Inited Email Server
+[3.9.2022_21.31.51.886] Bachend Sync Server running at 5000
+[3.9.2022_21.32.41.395] Error: Unknown action: get_app_emails
