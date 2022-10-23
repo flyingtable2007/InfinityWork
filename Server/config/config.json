@@ -26,5 +26,8 @@
 		"info_user": 32,
 		"update_user": 64,
 		"change_admin_permission": 128
+	},
+	"reserved_emails": {
+		"support@nxlc.de": true
 	}
 }

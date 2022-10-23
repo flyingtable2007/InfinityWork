@@ -15,17 +15,18 @@ window.on_logged_in_init_application = function(){
 	if(!season) return;
 	request("info", {}, function(data){
 		if(!data.username) return;
+		window.season_user_data = data;
+		window.socket = io();
 		var function_permissions = {
 			"menu_item_email": ["DEFAULT"],
 			"menu_item_cloud": ["DEFAULT"],
 			"menu_item_chats": ["DEFAULT"],
 			"menu_item_support": ["DEFAULT"],
-			"menu_item_game": ["DEFAULT", "game"],
+			"menu_item_game": ["DEFAULT"],
 			"menu_item_admin_supporter": ["DEFAULT", "support"],
 			"menu_item_admin_users": ["DEFAULT", "info_user"],
 			"menu_item_admin_servers": ["DEFAULT", "server_info"]
 		};
-		document.getElementById("menu_items_admin_container").style.display = (data.permissions["support"] || data.permissions["info_user"] || data.permissions["server_info"]) ? "block" : "none";
 		Object.keys(function_permissions).forEach(function(key){
 			has_permission = true;
 			function_permissions[key].forEach(function(p){
@@ -95,8 +96,8 @@ window.register = function(name, password, then){
 };
 window.support = function(){
 	var subject = document.getElementById("popup_support_subject").value;
-	var text = document.getElementById("popup_support_email").value;
-	var email = document.getElementById("popup_support_text").value;
+	var text = document.getElementById("popup_support_text").value;
+	var email = document.getElementById("popup_support_email").value;
 	
 	request("support", {"subject": subject, "text": text, "email": email}, function(data){
 		if(data.success){
@@ -144,6 +145,10 @@ window.on_register = function(){
 };
 window.onload = function(){
 	document.body.style.display = "block";
+	if(window.location.hash.startsWith("#season_")){
+		season = window.location.hash.split("_")[1];
+		open_popup("popup_login_with_other_season");
+	}
 	if(season){
 		on_logged_in_init_application();
 	}

@@ -177,6 +177,10 @@ window.update_emails_count = function(){
 	document.getElementById("deleted_count").innerText = email_boxes_counts.deleted.toString();
 }
 window.start_email_app = function(after_delting_email = false){
+	socket.emit("abbo", "email");
+	socket.on("new_email", function(data){
+		show_email(data.box, data.email, data.data);
+	});
 	request("get_email_addresses_of_user", {}, function(data){
 		if(data.addresses.length == 0 && !after_delting_email) return open_popup('popup_create_email_postfach');
 		if(data.addresses.length == 0 && after_delting_email) return close_app();

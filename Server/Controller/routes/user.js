@@ -5,7 +5,8 @@ module.exports = function(){
 	});
 	app.routes.user_action("support", async function(options, callback, username){
 		var id = (Math.random()+(new Date())).toString();
-		app.database.save_data_to_list("support_requests", id, {"author": username, "text": options.text, "time": (new Date()).toString(), "email": options.email});
+		app.database.save_data("support_requests", id, {"author": username, "text": options.text, "subject": options.subject, "time": (new Date()).toString(), "email": options.email, "id": id});
+		app.database.save_data_to_list("support_requests_list", "main", id);
 		callback({"success": true});
 	}, ["DEFAULT"]);
 	app.routes.user_action("write_chat_message", async function(options, callback, username){
@@ -25,7 +26,7 @@ module.exports = function(){
 		callback({"success": true, "count": Object.keys(d).length});
 	}, ["DEFAULT"]);
 	app.routes.user_action("create_email_address", async function(options, callback, username){
-		if(await app.database.get_data("email", options.email)) return callback({"success": false, "error": "Email Addresse bereits vergeben"});
+		if(await app.database.get_data("email", options.email) || (options.email in app.config.reserved_emails) ) return callback({"success": false, "error": "Email Addresse bereits vergeben"});
 		var postfach = JSON.stringify({"username": username, "servers": [app.config.own_server_ip]});
 		app.database.save_data("email", options.email, postfach);
 		app.database.save_data_to_list("email_addresses", username, {"email": options.email});

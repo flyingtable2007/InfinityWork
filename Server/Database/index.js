@@ -10,7 +10,7 @@ module.exports = class {
 		this.sync_connections = {};
 		this.sended_questions = {};
     }
-    send_to_user_socket_connection(username, data){
+    async send_to_user_socket_connection(username, data){
 		var sockets = await app.database.get_data("user_sockets", username);
 		if(!sockets) return;
 		var servers = {};

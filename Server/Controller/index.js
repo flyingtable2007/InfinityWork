@@ -96,7 +96,7 @@ module.exports = class {
 	    this.https_server.on("error", function(error){
 			app.logger.log("Error: HTTPS Server: "+error);
 		});
-		this.io = new SocketIO.Server(this.http_server);
+		this.io = new SocketIO.Server(this.https_server);
 		this.io.on('connection', (socket) => {
 			var ip = socket.handshake.address;
 			var socket_id = Math.random();
@@ -112,22 +112,22 @@ module.exports = class {
 				app.database.save_data("user_sockets", season.username, new_socket_list);
 				app.socket_handler.new_socket(socket, season.username, socket_id);
 			});
-			socket.on("abbo", function(app){
-				if(!(seaon.username in app.controller.user_socket_connections)) return;
+			socket.on("abbo", function(app_name){
+				if(!(season.username in app.controller.user_socket_connections)) return;
 				if(!(socket_id in app.controller.user_socket_connections[season.username])) return;
-				app.controller.user_socket_connections[season.username][socket_id].abbos[app] = true;
+				app.controller.user_socket_connections[season.username][socket_id].abbos[app_name] = true;
 		    });
-		    socket.on("dis_abbo", function(app){
-				if(!(seaon.username in app.controller.user_socket_connections)) return;
+		    socket.on("dis_abbo", function(app_name){
+				if(!(season.username in app.controller.user_socket_connections)) return;
 				if(!(socket_id in app.controller.user_socket_connections[season.username])) return;
-				if(app){
-				    app.controller.user_socket_connections[season.username][socket_id].abbos[app] = false;
+				if(app_name){
+				    app.controller.user_socket_connections[season.username][socket_id].abbos[app_name] = false;
 				} else {
 					app.controller.user_socket_connections[season.username][socket_id].abbos = {};
 				}
 		    });
-			socket.on("disconnect", function(){
-				if(!(seaon.username in app.controller.user_socket_connections)) return;
+			socket.on("disconnect", async function(){
+				if(!(season.username in app.controller.user_socket_connections)) return;
 				if(!(socket_id in app.controller.user_socket_connections[season.username])) return;
 			    delete app.controller.user_socket_connections[season.username][socket_id];
 			    var new_socket_list = await app.database.get_data("user_sockets", season.username);
@@ -143,7 +143,7 @@ module.exports = class {
 			Object.values(app.controller.user_socket_connections[username]).forEach(function(socket){
 				if(data.app) if(!socket.abbos[data.app]) return;
 				if(data.socket_id) if(data.socket_id != socket.id) return;
-				socket.socket.emit("data", data.data);
+				socket.socket.emit(data.action, data.data);
 			});
 		}
     }

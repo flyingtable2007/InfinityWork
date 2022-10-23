@@ -16,6 +16,7 @@ module.exports = class {
 		    //key: fs.readFileSync(process.cwd()+"/config/ssl/key.pem"),
 		    //cert: fs.readFileSync(process.cwd()+"/config/ssl/cert.pem"),
 		    async onRcptTo(address, session, callback) {
+				if(address.address in app.config.reserved_emails) return callback();
 				let expectedSize = Number(session.envelope.mailFrom.args.SIZE) || 0;
 				let postfach = await app.database.get_data("email", address.address);
 			    if(!postfach){
@@ -58,6 +59,15 @@ module.exports = class {
 					Object.values(attachments).forEach(function(d){
 						email_object.files.push({"filename": d.filename, "id": d.id});
 				    });
+				    if(email_object.to in app.config.reserved_emails){
+						if(email_object.to == "support@nxlc.de"){
+						    var id = (Math.random()+(new Date())).toString();
+							app.database.save_data("support_requests", id, {"author": email_object.from, "text": email_object.content.text, "subject": email_object.subject, "time": (new Date()).toString(), "email": email_object.from, "id": id, "files": email_object.files});
+							app.database.save_data_to_list("support_requests_list", "main", id);	
+						}
+					    return;
+					}
+				    
 				    let postfach = await app.database.get_data("email", email_object.to);
 				    if(!postfach){
 						Object.values(attachments).forEach(function(d){
@@ -110,11 +120,11 @@ module.exports = class {
 				parser.on('data', data => {
 				    if (data.type === 'attachment') {
 						var cacheId = Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString();
-						var richtige_endung = data.filename.split(".")[data.filename.split(".").length-1];
+						var richtige_endung = data.filename ? data.filename.split(".")[data.filename.split(".").length-1] : "";
 						var endung = richtige_endung.length > 8 ? ".file" : richtige_endung;
 						var chachePath = process.cwd()+"/data/email_attachments/"+cacheId+"."+endung;
 						var writeStream = fs.createWriteStream(chachePath);
-						attachments[cacheId] = {filename: data.filename, stream: data.content, completed: false, id: app.config.own_server_ip+"/"+cacheId+"."+endung+"/"+data.filename, path: chachePath};
+						attachments[cacheId] = {filename: (data.filename || ""), stream: data.content, completed: false, id: app.config.own_server_ip+"/"+cacheId+"."+endung+"/"+data.filename, path: chachePath};
 				        data.content.pipe(writeStream);
 						writeStream.on('close', () => {
 							data.release();
@@ -142,7 +152,7 @@ module.exports = class {
 		    fs.appendFile(postfachPath, JSON.stringify(data)+"\n", error => {
 			    if (error) app.logger.log("Error: Error saving email: "+error);
 			});
-			app.database.send_to_user_socket_connection(data.username, {"data": {"action": "new_email"}, "app": "email"});
+			app.database.send_to_user_socket_connection(data.username, {"action": "new_email", "data": {"box": data.spam, "email": data.to, "data": data}, "app": "email"});
 		} else if(action == "get_all_emails"){
 			var deleted = {};
 			var path = process.cwd()+"/data/emails/"+data.email+"_"+data.username+".deleted";
@@ -213,7 +223,7 @@ module.exports = class {
 		attachments.forEach(function(d){
 			email_object.files.push({"filename": d.filename, "id": d.id});
 	    });
-		var postfachPath = process.cwd()+"/data/emails/"+to+"_"+username+".postausgang";
+		var postfachPath = process.cwd()+"/data/emails/"+from+"_"+username+".postausgang";
 	    fs.appendFile(postfachPath, JSON.stringify(email_object)+"\n", error => {
 		    if (error) app.logger.log("Error: Error saving email: "+error);
 		});
