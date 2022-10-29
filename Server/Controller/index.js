@@ -10,7 +10,7 @@ const make_request = require('request');
 
 https.globalAgent.maxSockets = Infinity;
 
-function encoded_response(request, response, stream, mime_type, headers = {}, statuscode = 200){
+function encoded_response(request, response, stream, mime_type, headers = {}, statuscode = 200, is_br_file = false){
 	var acceptsEncoding = request.headers['accept-encoding'] || "";
 	var headers = headers;
 	if(mime_type) headers["Content-Type"] = mime_type;
@@ -19,17 +19,19 @@ function encoded_response(request, response, stream, mime_type, headers = {}, st
 	    hasEncoder : false,
 	    createEncoder : () => {}
 	}
-	if (acceptsEncoding.match(/\bdeflate\b/)) {
-		headers['content-encoding'] = 'deflate';
-	    encoder = {
-	        hasEncoder     : true,
-	        createEncoder  : zlib.createDeflate
-	    }
+	if(is_br_file) {
+		headers['content-encoding'] = 'br';
 	} else if (acceptsEncoding.match(/\bgzip\b/)) {
 		headers['content-encoding'] = 'gzip';
 	    encoder = {
 	      hasEncoder     : true,
 	      createEncoder  : zlib.createGzip
+	    }
+	} else if (acceptsEncoding.match(/\bdeflate\b/)) {
+		headers['content-encoding'] = 'deflate';
+	    encoder = {
+	        hasEncoder     : true,
+	        createEncoder  : zlib.createDeflate
 	    }
 	}
 	response.writeHead(statuscode, headers)
@@ -42,7 +44,9 @@ function encoded_response(request, response, stream, mime_type, headers = {}, st
 function send_file(file_path, request, response, is_attachment_filename){
 	fs.exists(file_path, (exists) => {
 		if(!exists) return response.writeHead(404).end();
-		var mime_type = mime.lookup(file_path);
+		var l_file_path = file_path;
+		if(l_file_path.endsWith(".br")) l_file_path = l_file_path.substring(0, l_file_path.lastIndexOf('.')) || l_file_path;
+		var mime_type = mime.lookup(l_file_path);
 		fs.stat(file_path, (error, stats) => {
 			if(error){
 				console.log(error);
@@ -64,14 +68,14 @@ function send_file(file_path, request, response, is_attachment_filename){
 					'Content-Type': mime_type || "",
 					'Content-Disposition': is_attachment_filename ? 'attachment; filename="'+is_attachment_filename+'"' : 'inline'
 			    };
-				encoded_response(request, response, file, mime_type, header, 206)
+				encoded_response(request, response, file, mime_type, header, 206, file_path.endsWith(".br"))
 			} else {
 				const head = {
 				    'Content-Length': stats.size,	
 				    'Content-Type': mime_type || "",
 				    'Content-Disposition': is_attachment_filename ? 'attachment; filename="'+is_attachment_filename+'"' : 'inline'
 				};
-				encoded_response(request, response, fs.createReadStream(file_path), mime_type, head, 200)
+				encoded_response(request, response, fs.createReadStream(file_path), mime_type, head, 200, file_path.endsWith(".br"))
 			}
 		});
 	});
@@ -148,64 +152,58 @@ module.exports = class {
 		}
     }
 	on_request(request, response){
-		process.nextTick(function() {
-            process.nextTick(function() {
-				setTimeout(function(){
-					var path = request.url.split("?")[0];
-					if(path.startsWith("/attachment/")){
-						var ip = path.split("/")[2];
-						var id = path.split("/").length > 3 ? path.split("/")[3] : "";
-						var filename = path.split("/").length > 4 ? path.split("/")[4] : ("Anhang."+(id.split(".").length > 2 ? id.split(".")[id.split(".").length-1] : "file"));
-						if(ip == app.config.own_server_ip){
-							var chachePath = process.cwd()+"/data/email_attachments/"+id;
-							send_file(chachePath, request, response, filename);
-							return;
-					    }
-					    var is_ip_of_valid_server = false;
-					    app.config.backend_server_list.forEach(function(serverip){
-						    if(serverip == ip) is_ip_of_valid_server = true;
-						});
-						if(!is_ip_of_valid_server) return response.writeHead(400).end();
-					    make_request("https://"+ip+"/attachment/"+ip+"/"+id).pipe(response);
-					    return;
-					} else if(path.startsWith("/upload_attachment/")){
-						var name = path.split("/")[2];
-						var cacheId = Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString();
-						var richtige_endung = name.split(".")[name.split(".").length-1];
-						var endung = richtige_endung.length > 8 ? ".file" : richtige_endung;
-						var chachePath = process.cwd()+"/data/email_attachments/"+cacheId+"."+endung+"/"+name;
-						var writeStream = fs.createWriteStream(chachePath);
-						var id = app.config.own_server_ip+"/"+cacheId+"."+endung;
-				        request.pipe(writeStream);
-						writeStream.on('close', () => {
-							response.writeHead(200).end(JSON.stringify({"satus": 200, "response": {"success": true, "id": id}}));
-						});
-						return;
-				    } else if(path in app.controller.routes){
-						if(request.method == "GET") return response.writeHead(400).end();
-			            var text = "";
-			            request.on("data", function(chunk){
-						    text += chunk;	
-						});
-						request.on("end", function(){
-							try {
-								var body = JSON.parse(text);
-								app.controller.routes[path](body, function(data){
-									encoded_response(request, response, new JsonStreamStringify(data), "application/json");
-								});
-							} catch(e){
-								response.writeHead(400).end();
-							}
-						});
-						return;
-					}
-					var host = (request.headers.host || app.config.domain) == app.config.domain ? false : request.headers.host;
-					if(path.endsWith("/")) path += "index.html";
-					path = process.cwd()+ app.config.frontend + (host ? "/"+host : "") + path;
-					send_file(path, request, response);
-				});
-		    });
-        });
+		var path = decodeURI(request.url.split("?")[0]);
+		if(path.startsWith("/attachment/")){
+			var ip = path.split("/")[2];
+			var id = path.split("/").length > 3 ? path.split("/")[3] : "";
+			var filename = path.split("/").length > 4 ? path.split("/")[4] : ("Anhang."+(id.split(".").length > 2 ? id.split(".")[id.split(".").length-1] : "file"));
+			if(ip == app.config.own_server_ip){
+				var chachePath = process.cwd()+"/data/email_attachments/"+id;
+				send_file(chachePath, request, response, filename);
+				return;
+		    }
+		    var is_ip_of_valid_server = false;
+		    app.config.backend_server_list.forEach(function(serverip){
+			    if(serverip == ip) is_ip_of_valid_server = true;
+			});
+			if(!is_ip_of_valid_server) return response.writeHead(400).end();
+		    make_request("https://"+ip+"/attachment/"+ip+"/"+id).pipe(response);
+		    return;
+		} else if(path.startsWith("/upload_attachment/")){
+			var name = path.split("/")[2];
+			var cacheId = Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString();
+			var richtige_endung = name.split(".")[name.split(".").length-1];
+			var endung = richtige_endung.length > 8 ? ".file" : richtige_endung;
+			var chachePath = process.cwd()+"/data/email_attachments/"+cacheId+"."+endung+"/"+name;
+			var writeStream = fs.createWriteStream(chachePath);
+			var id = app.config.own_server_ip+"/"+cacheId+"."+endung;
+	        request.pipe(writeStream);
+			writeStream.on('close', () => {
+				response.writeHead(200).end(JSON.stringify({"satus": 200, "response": {"success": true, "id": id}}));
+			});
+			return;
+	    } else if(path in app.controller.routes){
+			if(request.method == "GET") return response.writeHead(400).end();
+            var text = "";
+            request.on("data", function(chunk){
+			    text += chunk;	
+			});
+			request.on("end", function(){
+				try {
+					var body = JSON.parse(text);
+					app.controller.routes[path](body, function(data){
+						encoded_response(request, response, new JsonStreamStringify(data), "application/json");
+					});
+				} catch(e){
+					response.writeHead(400).end();
+				}
+			});
+			return;
+		}
+		var host = (request.headers.host || app.config.domain) == app.config.domain ? false : request.headers.host;
+		if(path.endsWith("/")) path += "index.html";
+		path = process.cwd()+ app.config.frontend + (host ? "/"+host : "") + path;
+		send_file(path, request, response);
 	}
 	on(path, then){
 		path = path.split("?")[0];

@@ -1,3 +1,5 @@
+const make_request = require('request');
+
 module.exports = function(){
 	app.routes.user_action("logout", async function(options, callback, username){
 		app.database.remove("seasons", options.season);
@@ -9,8 +11,68 @@ module.exports = function(){
 		app.database.save_data_to_list("support_requests_list", "main", id);
 		callback({"success": true});
 	}, ["DEFAULT"]);
+	app.routes.user_action("connect_to_discord", async function(options, callback, username){
+		try {
+			var code = options.code || "";
+			const tokenResponseData = await fetch('https://discord.com/api/oauth2/token', {
+				method: 'POST',
+				body: new URLSearchParams({
+					client_id: app.config.discord.clientId,
+					client_secret: app.config.discord.clientSecret,
+					code: code,
+					grant_type: 'authorization_code',
+					redirect_uri: `https://nxlc.de/`,
+					scope: 'identify',
+				}),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+			});
+			const oauthData = await tokenResponseData.json();
+			if(oauthData.error) return callback({"success": false});
+			var access_token = oauthData.access_token;
+			
+			const raw_user_data = await fetch('https://discord.com/api/users/@me', {
+				headers: {
+		          "authorization": `Bearer ${access_token}`
+		        }
+		    });
+		    var user_data = await raw_user_data.json();
+		    var discord_tag = user_data.username+"#"+user_data.discriminator;
+		    if(!discord_tag) return callback({"success": false});
+		    var check_if_is_connected_to_other_discord = await app.database.get_data("dicord_login", user_data.id);
+		    if(check_if_is_connected_to_other_discord) return callback({"success": false, "connected_to_other_account": true});
+			var user_has_already_connected_discord = await app.database.get_data("user_profile_"+username, "discord");
+			if(user_has_already_connected_discord){
+				app.database.save_data("dicord_login", user_has_already_connected_discord.id, false);
+			}
+		    app.database.save_data("user_profile_"+username, "discord", {"tag": discord_tag, "id": user_data.id});
+		    app.database.save_data("dicord_login", user_data.id, username);
+		    callback({"true": true, "tag": discord_tag});
+			
+	    } catch(e){
+		    console.log(e);
+		    callback({"success": false});
+		}
+	});
+	app.routes.user_action("update_user_profile", async function(options, callback, username){
+		if(!options.username) options.username = username;
+		if(options.username != username){
+			var permissions = await app.permissions.check_permissions_of_user(season.username);
+			if(!permissionsupdate_user) return;
+		}
+		var needs_verifycation = {"discord": true};
+		if(options.key in needs_verifycation) return;
+		app.database.save_data("user_profile_"+options.username, options.key, options.value);
+		callback({"success": true});
+	});
+	app.routes.user_action("get_user_profile_info", async function(options, callback, username){
+		if(!options.username) options.username = username;
+		var value = await app.database.get_data("user_profile_"+options.username, options.key);
+		callback({"success": true, "value": value || ""});
+	});
 	app.routes.user_action("write_chat_message", async function(options, callback, username){
-		app.database.save_data_to_list("chats", options.chat, {"author": username, "subject": options.subject, "text": options.text, "time": (new Date()).toString()});
+		if((options.text || "").trim().length > 0) app.database.save_data_to_list("chats", options.chat, {"author": username, "subject": options.subject, "text": options.text, "time": (new Date()).toString()});
 		callback({"success": true});
 	}, ["DEFAULT"]);
 	app.routes.user_action("get_chat_messages", async function(options, callback, username){

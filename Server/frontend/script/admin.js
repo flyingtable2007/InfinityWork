@@ -18,7 +18,7 @@ window.start_support_panel = function(){
 				document.getElementById("popup_support_panel_answer_count").innerText = m.answers ? m.answers.length : 0;
 				if(m.answers){
 				    m.answers.forEach(function(d){
-						document.getElementById("popup_support_panel_answers").value += d.user+" ("+d.time+"): \n"+d.text;
+						document.getElementById("popup_support_panel_answers").value += d.user+" ("+d.time+"): \n"+d.text+"\n \n";
 					});	
 				}
 				Object.keys(m).forEach(function(key){
@@ -39,7 +39,7 @@ window.start_support_panel = function(){
 					document.getElementById("popup_support_answer_editor_answers").value = "";
 					if(m.answers){
 						m.answers.forEach(function(d){
-							document.getElementById("popup_support_answer_editor_answers").value += d.user+" ("+d.time+"): \n"+d.text;
+							document.getElementById("popup_support_answer_editor_answers").value += d.user+" ("+d.time+"): \n"+d.text+"\n \n";
 						});
 					}
 					document.getElementById("popup_support_answer_editor_text").value = "";
@@ -70,11 +70,63 @@ window.admin_open_user_profile = function(){
 			document.getElementById("popup_admin_user_control_profile_emails").appendChild(e);
 		});
 		document.getElementById("popup_admin_user_control_profile_permissions").innerText = "";
-		response.data.permissions.forEach(function(p){
+		Object.keys(response.data.permissions).forEach(function(p){
+			if(!response.data.permissions[p]) return;
 			var e = document.createElement("li");
 			e.innerText = p;
 			document.getElementById("popup_admin_user_control_profile_permissions").appendChild(e);
 		});
+		document.getElementById("popup_admin_user_control_profile_login").style.display = season_user_data.permissions["update_user"] ? "block" : "none";
+		document.getElementById("popup_admin_user_control_profile_login").onclick = function(){
+			request("admin_login_with_other_user_account", {"username": username}, function(response){
+				if(response.success) {
+					window.open("https://"+window.location.host+"#season_"+response.season, '_blank');
+				}
+			});
+		};
+		document.getElementById("popup_admin_user_control_profile_open_profile").style.display = season_user_data.permissions["update_user"] ? "block" : "none";
+		document.getElementById("popup_admin_user_control_profile_open_profile").onclick = function(){
+			open_user_profile(username);
+		};
+		document.getElementById("popup_admin_user_control_profile_change_permissions").style.display = season_user_data.permissions["change_admin_permission"] ? "block" : "none";
+		document.getElementById("popup_admin_user_control_profile_change_permissions").onclick = function(){
+			document.getElementById("popup_admin_user_control_change_profile_permissions_username").innerText = username;
+			document.getElementById("popup_admin_user_control_change_profile_permissions_div").innerText = "";
+			window.popup_admin_user_control_profile_change_permissions_checkboxes_list = {};
+			Object.keys(response.data.permissions).forEach(function(p){
+				popup_admin_user_control_profile_change_permissions_checkboxes_list[p] = response.data.permissions[p];
+				var label= document.createElement("label");
+				var description = document.createTextNode(p);
+				var checkbox = document.createElement("input");
+				checkbox.type = "checkbox";
+				checkbox.value = p;
+				checkbox.checked = response.data.permissions[p];
+				checkbox.onchange = function(){
+					popup_admin_user_control_profile_change_permissions_checkboxes_list[p] = checkbox.checked;
+					console.log(username);
+					request("change_permissions_of_user", {"username": username, "permissions": popup_admin_user_control_profile_change_permissions_checkboxes_list}, function(response){
+						console.log("ok");
+						console.log(response);
+					});
+				};
+				label.appendChild(checkbox);
+				label.appendChild(description);
+				document.getElementById("popup_admin_user_control_change_profile_permissions_div").appendChild(label);
+			});
+			open_popup("popup_admin_user_control_change_profile_permissions");
+		};
 		open_popup("popup_admin_user_control_profile");
+	});
+};
+window.start_server_info_panel = function(){
+	request("servers", {}, function(response){
+		console.log(response);
+		document.getElementById("popup_admin_server_info_list").innerText = "";
+		response.servers.forEach(function(s){
+			var e = document.createElement("li");
+			e.innerText = JSON.stringify(s);
+			document.getElementById("popup_admin_server_info_list").appendChild(e);
+		});
+	    open_popup('popup_admin_server_info');
 	});
 };

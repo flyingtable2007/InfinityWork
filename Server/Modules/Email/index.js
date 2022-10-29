@@ -218,7 +218,8 @@ module.exports = class {
 		    "from": from,
 		    "to": to,
 		    "content": {"text": text, "html":  text},
-		    "files": []
+		    "files": [],
+		    "sender": app.config.domain
 		};
 		attachments.forEach(function(d){
 			email_object.files.push({"filename": d.filename, "id": d.id});

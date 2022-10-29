@@ -45,7 +45,6 @@ window.show_email = function(box, email, d){
         }
 		show_email("deleted", email, d);
 		email_box_divs[box][email].count--;
-		email_boxes_counts.deleted++;
 		email_boxes_counts[box]--;
 		update_emails_count();
 		if(opened_email_subject == d.subject) document.getElementById("app_email_email_preview_"+(last_email_preview_used_div ? 1 : 2)).style.opacity = 0;	
@@ -169,14 +168,28 @@ window.show_email = function(box, email, d){
 window.last_email_preview_used_div = true;
 window.opened_email_subject = false;
 window.email_box_divs = {};
-window.email_boxes_counts = {"posteingang": 0, "postausgang": 0, "spam": 0, "deleted": 0};
+window.email_boxes_counts = {"posteingang": 0, "postausgang": 0, "spam": 0};
 window.update_emails_count = function(){
 	document.getElementById("posteingang_count").innerText = email_boxes_counts.posteingang.toString();
 	document.getElementById("postausgang_count").innerText = email_boxes_counts.postausgang .toString();
-	document.getElementById("spam_count").innerText =email_boxes_counts.spam.toString();
-	document.getElementById("deleted_count").innerText = email_boxes_counts.deleted.toString();
-}
+	document.getElementById("spam_count").innerText = email_boxes_counts.spam.toString();
+};
+window.show_all_email_address_boxes = function(){
+	Object.values(email_box_divs).forEach(function(box){
+		Object.keys(box).forEach(function(key){
+			box[key].box_container.style.display = "block";
+		});
+	});
+};
+window.show_only_emails_of_one_address = function(email){
+	Object.values(email_box_divs).forEach(function(box){
+		Object.keys(box).forEach(function(key){
+			box[key].box_container.style.display = key != email ? "none" : "block";
+		});
+	});
+};
 window.start_email_app = function(after_delting_email = false){
+	email_boxes_counts = {"posteingang": 0, "postausgang": 0, "spam": 0};
 	socket.emit("abbo", "email");
 	socket.on("new_email", function(data){
 		show_email(data.box, data.email, data.data);
@@ -190,7 +203,7 @@ window.start_email_app = function(after_delting_email = false){
 			var e = document.createElement("li");
 			e.style = "cursor: grab; ";
 			e.innerText = email;
-			e.onclick = function(){
+			e.oncontextmenu = function(){
 				document.getElementById("popup_email_address_info_email").innerText = email;
 				document.getElementById("popup_email_address_info_delete_button").onclick = function(){
 					document.getElementById("popup_delete_email_confirm_email").innerText = email;
@@ -205,6 +218,9 @@ window.start_email_app = function(after_delting_email = false){
 				    open_popup("popup_delete_email_confirm");
 				};
 				open_popup("popup_email_address_info");
+			};
+			e.onclick = function(){
+				show_only_emails_of_one_address(email);
 			};
 			document.getElementById("app_email_addresses").appendChild(e);
 			var e2 = document.createElement("option");
@@ -231,7 +247,7 @@ window.start_email_app = function(after_delting_email = false){
 				b.innerText = "Wird geladen..";
 				el.appendChild(b);
 				document.getElementById("app_email_"+box).appendChild(el);
-				email_box_divs[box][email] = {"container": b, "count": false};
+				email_box_divs[box][email] = {"container": b, "count": false, "box_container": el};
 			});
 		});
 		data.addresses.forEach(async function(email){
@@ -239,7 +255,6 @@ window.start_email_app = function(after_delting_email = false){
 			email_boxes_counts.posteingang += emails.posteingang ? emails.posteingang.length : 0;
 			email_boxes_counts.postausgang += emails.postausgang ? emails.postausgang.length : 0;
 			email_boxes_counts.spam += emails.spam ? emails.spam.length : 0;
-			email_boxes_counts.deleted += emails.deleted ? emails.deleted.length : 0;
 			update_emails_count();
 			["posteingang", "postausgang", "spam", "deleted"].forEach(function(box){
 				var b = email_box_divs[box][email].container;
@@ -346,6 +361,7 @@ window.send_email = function(){
 };
 
 window.open_email_box_menu = function(id){
+	show_all_email_address_boxes();
 	var el = document.getElementsByClassName("email_box_menu");
 	for(var i = 0; i < el.length; i++){
 		if(el[i].id != id) el[i].style.opacity = 0;	

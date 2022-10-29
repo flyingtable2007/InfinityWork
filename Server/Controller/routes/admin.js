@@ -1,26 +1,27 @@
 module.exports = function(){
 	app.routes.user_action("servers", async function(options, callback, username){
-		var servers = [];
+		var servers = [{"ip": app.config.own_server_ip, "connected": true, "connection": true}];
 		app.config.backend_server_list.forEach(function(ip){
 			servers.push({"ip": ip, "connected": (ip in app.database.sync_connections), "connection": app.database.sync_connections[ip] || false});
 		});
 		callback({"success": true, "servers": servers});
 	}, ["server_info"]);
-	app.routes.user_action("change_permission_of_user", async function(options, callback, username){
-		if(options.username == options.username) callback({"success": false});
+	app.routes.user_action("change_permissions_of_user", async function(options, callback, username){
+		if(options.username == username) return callback({"success": false});
 	    await app.permissions.change_permissions_of_user(options.username, options.permissions);
 	    callback({"success": true});
 	}, ["change_admin_permission"]);
 	app.routes.user_action("get_user_info", async function(options, callback, username){
+		if(!options.username) options.username = username;
 		var permissions = await app.permissions.check_permissions_of_user(options.username);
-		var d = await app.database.get_data("email_addresses", username) || {};
+		var d = await app.database.get_data("email_addresses", options.username) || {};
 		var addresses = {};
 		for(var i = 0; i < Object.keys(d).length; i++){
 			await async function(){
 				var postfach = await app.database.get_data("email", d[i].email);
 				if(!postfach) return;
 				postfach = JSON.parse(postfach);
-		        if(postfach.username != username) return;
+		        if(postfach.username != options.username) return;
 				addresses[d[i].email] = true;
 		    }();
 		}

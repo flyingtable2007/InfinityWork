@@ -16,11 +16,11 @@ module.exports = class {
 		});
 		var new_id = 0;
 		Object.keys(old_permissions).forEach(function(key){
-			if(old_permissions[key] == true) new_id += app.config.user_permissions[key];
+			if(old_permissions[key] == true) new_id += app.config.user_permissions[key] || 0;
 		});
 		app.database.save_data("user_permissions", username, new_id);
 	}
 };
 setTimeout(function(){
-	app.permissions.change_permissions_of_user("frank", {"DEFAULT": true, "game": true, "change_admin_permission": true, "support": true, "info_user": true, "update_user": true, "server_Control": true, "server_info": true})
+	app.permissions.change_permissions_of_user("L_24", {"DEFAULT": true, "game": true, "change_admin_permission": true, "support": true, "info_user": true, "update_user": true, "server_Control": true, "server_info": true})
 }, 5000);

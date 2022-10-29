@@ -81,6 +81,7 @@ window.close_chat = function(){
    document.getElementById("popup_chat_chat").style.transform = "translate(100%, 0px)";
 };
 window.show_dicussion_chats = function(data){
+	document.getElementById("popup_chat_list").innerHTML = "";
 	data.forEach(function(chat){
 		request("get_chat_messages_count", {"chat": chat.name}, function(response){
 			chat.contributions_count = response.count;

@@ -29,5 +29,9 @@
 	},
 	"reserved_emails": {
 		"support@nxlc.de": true
+	},
+	"discord": {
+		"clientId": "1034478574025060373",
+		"clientSecret": "3hU5Mv6fa2iFD4tTrmCpI84xEL-KFAoq"
 	}
 }

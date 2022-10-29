@@ -46,7 +46,48 @@ module.exports = function(){
 			if(!response || error) return callback({"success": false});
 			var new_season = (Math.random()*Math.random()*Math.random()*Math.random()*Math.random()*Math.random()*10000000).toString();
 			app.database.save_data("seasons", new_season, JSON.stringify({"username": username, "time": (new Date()).toString()}));
-			callback({"success": true, "season": new_season});	
+			callback({"success": true, "season": new_season});
 	    });
+	});
+	app.routes.main_action("login_with_discord", async function(options, callback){
+	    try {
+			var code = options.code || "";
+			const tokenResponseData = await fetch('https://discord.com/api/oauth2/token', {
+				method: 'POST',
+				body: new URLSearchParams({
+					client_id: app.config.discord.clientId,
+					client_secret: app.config.discord.clientSecret,
+					code: code,
+					grant_type: 'authorization_code',
+					redirect_uri: `https://nxlc.de/`,
+					scope: 'identify',
+				}),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+			});
+			const oauthData = await tokenResponseData.json();
+			if(oauthData.error) return callback({"success": false});
+			var access_token = oauthData.access_token;
+			const raw_user_data = await fetch('https://discord.com/api/users/@me', {
+				headers: {
+		          "authorization": `Bearer ${access_token}`
+		        }
+		    });
+		    var user_data = await raw_user_data.json();
+		    var discord_tag = user_data.username+"#"+user_data.discriminator;
+		    if(!discord_tag) return callback({"success": false});
+		    var username = await app.database.get_data("dicord_login", user_data.id);
+		    if(username){
+				var new_season = (Math.random()*Math.random()*Math.random()*Math.random()*Math.random()*Math.random()*10000000).toString();
+				app.database.save_data("seasons", new_season, JSON.stringify({"username": username, "time": (new Date()).toString()}));
+				callback({"success": true, "season": new_season});	
+			} else {
+				callback({"success": false, "no_account": true});
+			}
+	    } catch(e){
+		    console.log(e);
+		    callback({"success": false});
+		}
 	});
 };

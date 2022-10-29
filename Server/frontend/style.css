@@ -110,7 +110,9 @@ h1 {
   margin: 10px; 
   background-color: lightred;
   transition: all 1s;
-  
+  overflow-wrap: break-word;  
+  word-wrap: break-word; 
+  word-break: break-word;
 }
 .menu_item:hover {
   transform: scale(0.9);
@@ -122,7 +124,7 @@ h1 {
   min-width: 550px;
   max-width: 90%;
   height: 0px;
-  transition: height 1s;
+  transition: height 0.6s;
   box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
   -webkit-box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
   -moz-box-shadow: -1px 20px 54px -21px rgba(0,0,100,0.6);
@@ -233,7 +235,7 @@ h1 {
     transform: scale(0.96);
 }
 
-.popup_support_panel > input[type=text], select {
+.popup_support_panel > input[type=text] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -263,4 +265,17 @@ h1 {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+iframe {
+  border: 0px none;
+  outline: none;
+}
+.Tweetin_post_container {
+    margin-top: 30px;
+    width: 100%; 
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 1px 5px 52px 9px rgba(147,109,248,0.09);
+    -webkit-box-shadow: 1px 5px 52px 9px rgba(147,109,248,0.09);
+    -moz-box-shadow: 1px 5px 52px 9px rgba(147,109,248,0.09);
 }

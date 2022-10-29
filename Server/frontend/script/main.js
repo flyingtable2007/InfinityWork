@@ -10,6 +10,31 @@ window.open_popup = function(id, h = "90%"){
   document.getElementById(id).style.height = h;
   document.getElementById("popups_container").style.pointerEvents = "auto";
 };
+window.get_user_profile_data = async function(key, username = null){
+	return new Promise(function(resolve, reject){
+		request("get_user_profile_info", {username: username, key: key}, function(data){
+			resolve(data.value);
+	    });
+    });
+};
+window.open_user_profile = async function(username = null){
+	document.getElementById("popup_user_profile_header_username").innerText = username;
+	document.getElementById("popup_user_profile_table_username").value = username;
+	document.getElementById("popup_user_profile_table_email").value = await get_user_profile_data("email", username);
+	document.getElementById("popup_user_profile_table_email").onchange = function(){
+		request("update_user_profile", {username: username, key: "email", "value": document.getElementById("popup_user_profile_table_email").value});
+	};
+	document.getElementById("popup_user_profile_table_call").value = await get_user_profile_data("call_numer", username);
+	document.getElementById("popup_user_profile_table_call").onchange = function(){
+		request("update_user_profile", {username: username, key: "call_numer", "value": document.getElementById("popup_user_profile_table_call").value});
+	};
+	var discord_acc = await get_user_profile_data("discord", username);
+	document.getElementById("popup_user_profile_table_connect_discord").innerText = discord_acc ? discord_acc.tag : "Konto verbinden";
+	document.getElementById("popup_user_profile_table_connect_discord").onclick = function(){
+		connect_discord_app();
+	};
+    open_popup("popup_user_profile");
+};
 window.season = window.localStorage.getItem("season") || false;
 window.on_logged_in_init_application = function(){
 	if(!season) return;
@@ -34,6 +59,26 @@ window.on_logged_in_init_application = function(){
 			});
 			document.getElementById(key).style.display = has_permission ? "block" : "none";
 		});
+		setTimeout(async function(){
+			var discord_acc = await get_user_profile_data("discord");
+			document.getElementById("main_menu_discord_tag").innerText = discord_acc.tag ? discord_acc.tag : "";
+		}, 0);
+		document.getElementById("main_menu_username").innerText = data.username;
+		document.getElementById("Tweetin_profile_button_username").innerText = data.username;
+		document.getElementById("main_menu_profile_button").onclick = function(){
+	        open_user_profile(data.username);
+		};
+		document.getElementById("main_menu_settings_button").onclick = function(){
+		    open_popup("popup_user_settings");	
+		};
+		document.getElementById("Tweetin_profile_button").style.display = "flex";
+		setTimeout(function(){
+		    document.getElementById("Tweetin_profile_button").style.opacity = 1;
+		}, 1000);
+		document.getElementById("Tweetin_login_button").style.opacity = 0;
+		setTimeout(function(){
+		    document.getElementById("Tweetin_login_button").style.display = "none";
+		}, 1000);
 		document.getElementById("logged_in_menu_window").style.display = "block";
 		setTimeout(function(){
 		    document.getElementById("logged_in_menu_window").style.opacity = 1;
@@ -49,7 +94,7 @@ window.on_logged_in_init_application = function(){
 		]);
 	});
 };
-window.request = function(action, options, then){
+window.request = function(action, options, then = false){
 	var xhr = new XMLHttpRequest();
 	var url = "/api/";
 	xhr.open("POST", season ? "/api/user" : "/api/main", true);
@@ -57,20 +102,8 @@ window.request = function(action, options, then){
 	xhr.onreadystatechange = function () {
 	    if (xhr.readyState === 4 && xhr.status === 200) {
 	        var json = JSON.parse(xhr.responseText);
-	        if(json.status == 401){
-				season = false;
-				document.getElementById("start_menu_window").style.display = "block";
-				setTimeout(function(){
-				    document.getElementById("start_menu_window").style.opacity = 1;	
-				}, 20);
-				document.getElementById("logged_in_menu_window").style.opacity = 0;
-				setTimeout(function(){
-					document.getElementById("logged_in_menu_window").style.display = "none";
-				}, 1000);
-				close_popup();
-				return;
-			};
-	        then(json.response);
+	        if(json.status == 401) return logout_hide_elements();
+	        if(then) then(json.response);
 	    }
 	};
 	var data = JSON.stringify({"season": season, "action": action, "options": options});
@@ -143,14 +176,60 @@ window.on_register = function(){
 		}
 	});
 };
-window.onload = function(){
+function generateRandomString() {
+	let randomString = '';
+	const randomNumber = Math.floor(Math.random() * 10);
+	for (let i = 0; i < 20 + randomNumber; i++) {
+		randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+	}
+	return randomString;
+}
+window.connect_discord_app = function(){
+	const randomString = generateRandomString();
+    localStorage.setItem('oauth-state', randomString);
+    var url = "https://discord.com/api/oauth2/authorize?client_id=1034478574025060373&redirect_uri=https%3A%2F%2Fnxlc.de%2F&response_type=code&scope=identify%20guilds.members.read%20guilds%20connections";
+    url += `&state=${btoa(randomString)}`;
+    window.location = url;
+};
+window.url_season = false;
+window.onload = async function(){
 	document.body.style.display = "block";
 	if(window.location.hash.startsWith("#season_")){
+		url_season = true;
 		season = window.location.hash.split("_")[1];
 		open_popup("popup_login_with_other_season");
 	}
+	
 	if(season){
 		on_logged_in_init_application();
+	}
+
+	const fragment = new URLSearchParams(window.location.search);
+	const [code, state] = [fragment.get('code') || false, fragment.get('state') || ""];
+    if(!code) return;
+    if(!localStorage.getItem('oauth-state')) return;
+	if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) return;
+	
+	if(season) {
+		request("connect_to_discord", {"code": code}, function(data){
+			if(data.connected_to_other_account){
+				open_popup("popup_discord_account_already_connected");
+			} else {
+			    document.getElementById("main_menu_discord_tag").innerText = data.tag ? data.tag : "";
+			}
+		});
+	} else {
+		request("login_with_discord", {"code": code}, function(data){
+			if(data.success){
+				season = data.season;
+				window.localStorage.setItem("season", season);
+				on_logged_in_init_application();
+			} else {
+				if(data.no_account){
+					open_popup("popup_register");
+				}
+			}
+		});
 	}
 };
 window.open_app = function(name){
@@ -180,18 +259,31 @@ window.close_app = function(){
 		}
 	}, 1000);
 };
+window.logout_hide_elements = function(){
+	season = false;
+	if(!url_season) window.localStorage.setItem("season", "");
+	document.getElementById("Tweetin_login_button").style.display = "flex";
+	setTimeout(function(){
+	    document.getElementById("Tweetin_login_button").style.opacity = 1;
+	}, 20);
+	document.getElementById('Tweetin_profile_button_dropdown').style.height = "0px";
+	document.getElementById("Tweetin_profile_button").style.opacity = 0;
+	setTimeout(function(){
+	    document.getElementById("Tweetin_profile_button").style.display = "none";
+	}, 1000);
+	document.getElementById("start_menu_window").style.display = "block";
+	setTimeout(function(){
+	    document.getElementById("start_menu_window").style.opacity = 1;	
+	}, 20);
+	document.getElementById("logged_in_menu_window").style.opacity = 0;
+	setTimeout(function(){
+		document.getElementById("logged_in_menu_window").style.display = "none";
+	}, 1000);
+	close_popup();
+	if(url_season) window.close();
+};
 window.logout = function(){
 	request("logout", {"season": season}, function(data){
-		season = false;
-		window.localStorage.setItem("season", "");
-		document.getElementById("start_menu_window").style.display = "block";
-		setTimeout(function(){
-		    document.getElementById("start_menu_window").style.opacity = 1;	
-		}, 20);
-		document.getElementById("logged_in_menu_window").style.opacity = 0;
-		setTimeout(function(){
-			document.getElementById("logged_in_menu_window").style.display = "none";
-		}, 1000);
-		close_popup();
+		logout_hide_elements();
 	});
 };

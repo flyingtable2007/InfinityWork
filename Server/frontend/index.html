@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
         <script src="script/main.js"></script>
         <script src="script/email.js"></script>
+        <script src="script/tweetin.js"></script>
         <script src="script/cloud.js"></script>
         <script src="script/chats.js"></script>
         <script src="script/upload.js"></script>
@@ -24,7 +25,7 @@
 	<body style="display: none; ">
 		<div class="menu" onclick="close_app(); ">
 			<a href="#" style="position: absolute; " onclick="close_app(); ">
-			    <img class="logo" alt="Infinitywork" src="/images/InfinityWork.png" style="cursor: grab; " onclick="close_app(); ">
+			    <img loading="lazy" class="logo" alt="Infinitywork" src="/images/InfinityWork.png" style="cursor: grab; " onclick="close_app(); ">
 			</a>
 			<div style="position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; ">
 			    <div style="width: 300px; height: 100%; display: flex; justify-content: center; align-items: center;">
@@ -41,16 +42,19 @@
 					<div style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; ">
 					    <div style="width: 70%; min-width: 1000px; max-width: 100%; height: 500px;  position: relative; ">
 					        <div style="position: absolute; top: 0px; bottom: 0px; left: 0px; width: 500px; ">
-					            <img style="height: 100%; width: 100%; border-radius: 50px; " src="/images/laptop.jpg" alt="Bild" >
+					            <img loading="lazy" style="height: 100%; width: 100%; border-radius: 50px; " src="/images/laptop.jpg" alt="Bild" >
 					        </div>
 					        <div style="position: absolute; top: 0px; right: 0px; bottom: 0px; left: 500px; color: white; ">
 								<div style="width: 100%; height: 95%; display: flex; justify-content: center; align-items: center; ">
 									<div style="width: 80%; ">
 							            <h2 style="font-size: 44px; text-align: center; ">Einfach Online Arbeiten</h2>
 							            <p style="font-size: 22px; text-align: center;  ">Das Ziel von InfinityWork ist es, das Arbeiten online im Browser möglichst einfach zu machen. Dazu bieten wir verschiedene nützliche Funktionen und Werkzeige an. Melden Sie sich Jetzt an oder erstellen Sie ein kostenloses Konto.</p>
-							            <div style="width: 100%; height: 150px;  display: flex; flex-flow: row wrap; justify-content: space-around; margin-top: 40px; ">
+							            <div style="width: 100%; height: 50px;  display: flex; flex-flow: row wrap; justify-content: space-around; margin-top: 40px; ">
 								            <button class="home_page_login_buttons" onclick="open_popup('popup_login'); ">Anmelden</button>
 						                    <button class="home_page_login_buttons" onclick="open_popup('popup_register'); ">Konto erstellen</button>
+						                </div>
+						                <div style="width: 100%; height: 50px;  display: flex; flex-flow: row wrap; justify-content: space-around; margin-top: 20px; ">
+								            <button class="home_page_login_buttons" onclick="connect_discord_app(); " style="width: 90%; ">Mit Discord Konto Anmelden</button>
 						                </div>
 					                </div>
 				                </div>
@@ -58,15 +62,24 @@
 					    </div>
 					</div>
 			    </section>
+			    <section style="margin-top: 10%; height: 350px; ">
+					<div style="width: 50%; margin-left: 25%; ">
+				        <h2 style="text-align: center; color: white; font-size: 34px; ">Immer die Neusten Informationen mit Tweetin!</h2>
+				        <p  style="text-align: center; color: white; font-size: 20px; ">Bleiben Sie mit unsere Eigententwicklung Tweetin immer auf dem neusten Stand und trotzdem unabhängig von großen Unternehmen! Tweetin legt Besonders Wert auf Datenschutz und eine neutrale, unvoreingenommene Chat umgebung! </p>
+				        <div style="width: 100%; display: flex; justify-content: center; align-items: center; ">
+				            <button class="home_page_login_buttons" style="width: 40%; min-width: 300px; " onclick="open_app('Tweetin'); ">Was geht ab in der Welt?</button>
+				        </div>
+			        </div>
+			    </section>
 			    <section style="margin-top: 10%; height: 100%; ">
 			        <div style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; ">
-			            <iframe width="900" height="600" src="https://www.youtube.com/embed/DR4OyAV4BxE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			            <iframe loading="lazy" width="900" height="600" src="https://www.youtube.com/embed/DR4OyAV4BxE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			        </div>
 			    </section>
 			    <section>
 					<div style="height: 100%; width: 80%; margin-left: 10%; ">
 						<div style="height: 100%; width: 50%; display: flex; justify-content: center; align-items: center; float: left; ">
-						     <iframe src="https://discord.com/widget?id=811146335058264085&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+						     <iframe loading="lazy" src="https://discord.com/widget?id=811146335058264085&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 						</div>
 				        <div style="height: 100%; width: 50%; display: flex; justify-content: center; align-items: center; float: right; ">
 						     <div style="width: 80%; height: 50%; text-align: center; ">
@@ -92,91 +105,152 @@
 				        <p><a style="text-decoration: underline; text-decoration-color: blue; cursor: grab; font-size: 18px; " onclick="open_popup('popup_about_us');">Über Uns</a></p>
 			        </div>
 			    </section>
+			    <section style="margin-top: 10%; height: 100%; ">
+					<div style="height: 100%; width: 80%; margin-left: 10%; text-align: center; ">
+						<h2 style="font-size: 34px; ">In Kooperation mit GG Clan</h2>
+						<p style="font-size: 20px; ">InfinityWork wurde in Zusammenarbeit mit dem e SPort Team GG Clan entwickelt. Genaueres über die Community erfahrt ihr auf deren Discord Server: <a href="https://discord.gg/EpuV6aFJ7a">https://discord.gg/EpuV6aFJ7a</a></p>
+						<div style="width: 100%; height: 150px;  display: flex; flex-flow: row wrap; justify-content: space-around; margin-top: 40px; ">
+		                    <button class="home_page_login_buttons" onclick="open('https://ggclan.nxlc.de/', '_blank'); ">Mehr Informationen</button>
+		                </div>
+					</div>
+			    </section>
 		    </div>
-		    <div class="Text" id="logged_in_menu_window" style="display: none; opacity: 0; transition: all 1s; ">
-			    <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; text-align: center; overflow-x: hidden; overflow-y: auto; font-size: 16px; display: flex; flex-wrap: wrap; ">
-					<div class="menu_item" onclick="start_email_app(); " id="menu_item_email">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/email.png" style="height: 70px; width: 70px; ">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Email Postfach
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="start_cloud_app(); " id="menu_item_cloud">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/NXLC.png" style="height: 65px; width: 65px; ">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Next Level Cloud
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="open_popup('popup_chat');" id="menu_item_chats">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/chat.png" style="height: 80px; width: 80px; ">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Diskussion
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="start_game_app();" id="menu_item_game">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/game.png" style="height: 50px; width: 50px; ">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Infinity World
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="open_popup('popup_support');" id="menu_item_support">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/help.png" style="height: 70px; width: 70px; ">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Hilfe
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="open_popup('popup_spend', '300px');" id="menu_item_spend">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/spend.png" style="height: 70px; width: 70px; ">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Spenden
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="logout(); ">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/logout.png" style="height: 50px; width: 50px; " id="menu_item_logout">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Abmelden
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="start_support_panel(); " id="menu_item_admin_supporter">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Support Anfragen
-			            </div>
-			        </div>
-			        <div class="menu_item" onclick="open_popup('popup_admin_user_control'); " id="menu_item_admin_users" style="width: 100px; ">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Benutzerverwaltung
-			            </div>
-			        </div>
-			        <div class="menu_item" id="menu_item_admin_servers" style="width: 100px; ">
-			            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                <img src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
-			            </div>
-			            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
-			                Serververwaltung
-			            </div>
-			        </div>
-			    </div>
-	        </div>
+		    <div id="logged_in_menu_window" style="display: none; opacity: 0; transition: all 1s; ">
+		        <div style="position: fixed; top: 90px; left: 0px; right: 0px; bottom: 0px; display: flex; justify-content: space-around; align-items: center;">
+		            <div style="height: 100%; width: 75%; max-height: 95%; position: relative; ">
+		                <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; width: 300px; display: flex; justify-content: center; align-items: center; ">
+							<div style="width: 100%; height: 500px; background-color: white; border-radius: 15px; position: relative; ">
+								<div style="position: absolute; top: 20px; left: 0px; right: 0px; height: 150px; display: flex; justify-content: center; align-items: center; ">
+				                    <img loading="lazy" style="height: 150px; width: 150px; border-radius: 50%; " alt="Profilbild" src="images/man.png">
+			                    </div>
+			                    <div style="position: absolute; top: 170px; left: 0px; right: 0px; height: 30px; font-size: 20px; text-align: center; float-weight: bold; display: flex; justify-content: center; align-items: center; color: black; "><span id="main_menu_username"></span></div>
+			                    <div style="position: absolute; top: 200px; left: 0px; right: 0px; height: 20px; font-size: 12px; text-align: center; float-weight: small; display: flex; justify-content: center; align-items: center; color: black; "><span id="main_menu_discord_tag"></span></div>
+			                    <div style="position: absolute; top: 220px; left: 0px; right: 0px; bottom: 0px; display: flex; flex-direction: column; justify-content: space-around; align-items: center; ">
+									<button class="on_hover_down" style="width: 200px; height: 40px; " id="main_menu_profile_button">Mein Profil</button>
+									<button class="on_hover_down" style="width: 200px; height: 40px; " id="main_menu_settings_button">Einstellungen</button>
+			                        <button class="on_hover_down" style="background-color: red; height: 40px; width: 200px; " onclick="logout(); ">Abmelden</button>
+			                    </div>
+		                    </div>
+		                </div>
+		                <div style="position: absolute; top: 0px; left: 320px; right: 0px; bottom: 0px; overflow-x: hidden; overflow-y: auto; display: flex; justify-content: space-around; align-items: center;">
+							<div style="width: 100%; ">
+								<div style="width: 100%; height: 140px; ">
+				                    <div class="menu_item" onclick="start_email_app(); " id="menu_item_email">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/email.png" style="height: 70px; width: 70px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Email Postfach
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="start_cloud_app(); " id="menu_item_cloud">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/NXLC.png" style="height: 65px; width: 65px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Next Level Cloud
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="open_popup('popup_chat');" id="menu_item_chats">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/chat.png" style="height: 80px; width: 80px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Diskussion
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="open_app('Tweetin'); " id="menu_item_chats">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/Tweetin.png" style="height: 80px; width: 80px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Tweetin
+							            </div>
+							        </div>
+						        </div>
+						        <div style="width: 100%; height: 140px; margin-top: 20px; ">
+									<div class="menu_item" onclick="open_app('staysafe_game');" id="menu_item_game">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/StaySafe_logo.png" style="height: 50px; width: 50px; border-radius: 50%; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Stay Safe
+							            </div>
+							        </div>
+						            <div class="menu_item" onclick="start_game_app();" id="menu_item_game">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/game.png" style="height: 50px; width: 50px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Infinity World
+							            </div>
+							        </div>
+						        </div>
+							    <div style="width: 100%; height: 140px; margin-top: 20px; ">
+									<div class="menu_item" onclick="open_popup('popup_gutschein_codes');" id="menu_item_support">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/rabatt-gutschein.png" style="height: 70px; width: 70px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Gechenkcodes
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="open_popup('popup_support');" id="menu_item_support">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/help.png" style="height: 70px; width: 70px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Hilfe
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="open_popup('popup_spend', '300px');" id="menu_item_spend">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/spend.png" style="height: 70px; width: 70px; ">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Spenden
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="logout(); ">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/logout.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center; ">
+							                Abmelden
+							            </div>
+							        </div>
+							    </div>
+							    <div style="width: 100%; margin-top: 20px; ">
+							        <div class="menu_item" onclick="start_support_panel(); " id="menu_item_admin_supporter">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Support Anfragen
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="open_popup('popup_admin_user_control'); " id="menu_item_admin_users" style="width: 150px; ">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Benutzerverwaltung
+							            </div>
+							        </div>
+							        <div class="menu_item" onclick="start_server_info_panel(); " id="menu_item_admin_servers" style="width: 150px; ">
+							            <div style="height: 80px; widtn: 100%; display: flex; justify-content: space-around; align-items: center;">
+							                <img loading="lazy" src="/images/admin.png" style="height: 50px; width: 50px; " id="menu_item_logout">
+							            </div>
+							            <div style="height: 30px; widtn: 100%; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+							                Serververwaltung
+							            </div>
+							        </div>
+							     </div>
+			                </div>
+			             </div>
+		            </div>
+		        </div>
+		    </div>
         </div>
         <div id="popups_container" style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; pointer-events: none; display: flex; justify-content: center; align-items: center; z-index: 1000; " onclick="close_popup(); ">
            <div class="popup" id="popup_imprint" style="background-color: white; color: black; " onclick="event.stopPropagation();">
@@ -198,6 +272,7 @@
 		           <h3>Mitverantvortlich für Homepage und Anwendung sind:</h3>
 		           <ul>
 		                <li>Lars ( <a href="mailto:lars@nxlc.de">lars@nxlc.de</a> )</li>
+		                <li>Diego ( Discord: gg3ae2_moderator#5474 )</li>
 		           </ul>
 		           <h4>Weitere Personen mit dem Recht zur Bearbeitung von Website und Anwendung:</h4>
 		           <ul>
@@ -491,7 +566,7 @@
 		            <form action="https://www.paypal.com/donate" method="post" target="_top" style="text-align: center; ">
 					    <input type="hidden" name="hosted_button_id" value="ABAQ8ZYWRVX86" />
 					    <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Spenden mit dem PayPal-Button" />
-					    <img alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+					    <img loading="lazy" alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
 					</form>
 		       </div>
 		   </div>
@@ -520,6 +595,32 @@
 		                <div id="popup_register_info" style="width: 100%; margin-top: 30px; text-align: center; color: red; "></div>
 		            </div>
 		            <p style="margin-top: 60px; font-size: 14px; text-align: center; ">Bitte denken Sie daran: InfnityWork befindet sich noch in der Entwicklungsphase. Das heißt, dass noch nicht alles ausgiebig getestet wurde und eventuell noch ungemeldete Fehler enthalten sind. Wir bitten Sie darauf rücksicht zu nehmen und sich nicht auf InfinityWork zu verlassen. Für eventuelle Schäden, die zum Beispiel durch Siecherheitslücken oder ähnliches entstanden sind übernehmen wir keine Haftung. WIr hoffen Sie haben Verständnis und helfen uns bei der Weiterentwicklung der Anwendung, indem Sie sich bei uns melden, wenn Sie Fehler in der Anwendung oer sonstige Probleme gefunden haben, die verbessert werden sollten. Vielen Dank!</p>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_user_settings" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 18px; margin-top: 55px; "><span id="popup_user_profile_username"></span> | Einstellungen</h2>
+		            <table>
+		            
+		            </table>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_user_profile" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 18px; margin-top: 55px; "><span id="popup_user_profile_header_username"></span> | Profil</h2>
+		            <div style="width: 100%; position: relative; text-align: left; color: black; ">
+						<strong>Allgemeine Informationen</strong>
+			            <table style="color: black; ">
+			                <tr><th>Benutzername</th><th><input type="text" placeholder="Dein benutzername" id="popup_user_profile_table_username" disabled></th></tr>
+			                <tr><th>Wiederherstellungs Email</th><th><input type="text" placeholder="EMail Addresse" id="popup_user_profile_table_email"></th></tr>
+			                <tr><th>Telefonnummer</th><th><input type="text" placeholder="Telefonnummer" id="popup_user_profile_table_call"></th></tr>
+			            </table>
+			            <strong style="margin-top: 20px; ">Konto & Verknüpfte Konten</strong>
+			            <table style="color: black; ">
+							 <tr><th>Discord: </th><th><button id="popup_user_profile_table_connect_discord">Konto verbinden</button></th></tr>
+			                <tr><th>Passwort</th><th><button id="popup_user_profile_table_change_password">Password ändern</button></th></tr>
+			            </table>
+		            </div>
 		       </div>
 		   </div>
 		   <div class="popup" id="popup_create_email_postfach" style="background-color: white; color: black; " onclick="event.stopPropagation();">
@@ -573,6 +674,15 @@
 		            <p style="font-size: 18px; text-align: center; ">Wollen Sie das die Email Addresse <strong><span id="popup_delete_email_confirm_email"></span></strong> und das dazugehörige Postfach wirklich löschen? Dadurch sind ALLE empfangenen und gesendeten Emails samt Anhängen für immer verlohren. Es wird dadurch möglich sein, dass diese Email addresse von anderen Person registriert und genutz werden kann. Stellen Sie sicher, dass ihre Kontaktperson darüber informiert sind, damit neue Email eigentümer nicht in Ihrem Namen schreiben können oder sich sogar mithilfe es Email Postfaches bei Accounts anderer Dienste anmelden konnen.</p>
 		            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; ">
 		                <button id="popup_delete_email_confirm_button" style="height: 50px; width: 500px; margin-top: 30px; background-color: blue; color: white; font-size: 20px; cursor: grab; ">Ich verstehe die Risiken und möchte das Postfach unwiederruflich löschen</button>
+		            </div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_discord_account_already_connected" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow-x: hidden; overflow-y: hidden; font-size: 12px; ">
+		            <h2 style="text-align: center; font-size: 20px; ">Dieser Account ist bereits mit einem Anderen InfinityWork Account verbunden. </h2>
+		            <p style="font-size: 18px; text-align: center; ">Dieser Account ist bereits mit einem Anderen InfinityWork Account verbunden und kann daher nicht verwendet werden. Löschen Sie den DIscord Account aus dem Profil, um Ihn hier zu verwenden. </p>
+		            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; ">
+		                <button onclick="close_popup();">Schließen</button>
 		            </div>
 		       </div>
 		   </div>
@@ -630,23 +740,42 @@
 		   </div>
 		   <div class="popup" id="popup_admin_user_control" style="background-color: white; color: black; " onclick="event.stopPropagation();">
 		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow: hidden; font-size: 12px; overflow-y: auto; overflow-x: hidden; " class="popup_support_panel">
-				   <h2>InfinityWork | Benutzerverwaltung</h2>
-				   <p>Sehen Sie Details zu einem Benutzeraccount, indem Sie den Benutzername zum Öffnen des Profils verwenden.</p>
+				   <h2 style="text-align: center; ">InfinityWork | Benutzerverwaltung</h2>
+				   <p style="text-align: center; ">Sehen Sie Details zu einem Benutzeraccount, indem Sie den Benutzername zum Öffnen des Profils verwenden.</p>
 				   <input type="text" style="width: 100%; heght: 50px; font-size: 20px; " id="popup_admin_user_control_username" placeholder="Benutzername">
 				   <button style="width: 100%; heght: 50px; font-size: 20px; margin-top: 20px; " onclick="admin_open_user_profile(); ">Benutzerdaten laden</button>
 		       </div>
 		   </div>
 		   <div class="popup" id="popup_admin_user_control_profile" style="background-color: white; color: black; " onclick="event.stopPropagation();">
 		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow: hidden; font-size: 12px; overflow-y: auto; overflow-x: hidden; " class="popup_support_panel">
-				   <h2>Benutzerinformationen: <span id="popup_admin_user_control_profile_username"></span></h2>
-				   <div style="text-align: left;">
-					   <strong>Email Addressen: </strong>
-					   <ul id="popup_admin_user_control_profile_emails"></ul>
+				   <h2 style="text-align: center; ">Benutzerinformationen: <span id="popup_admin_user_control_profile_username"></span></h2>
+				   <div style="width: 50%; float: left; ">
+					   <div style="text-align: left;">
+						   <strong>Email Addressen: </strong>
+						   <ul id="popup_admin_user_control_profile_emails"></ul>
+					   </div>
+					   <div style="text-align: left; margin-top: 20px; ">
+						   <strong>Berechtigungen: </strong>
+						   <ul id="popup_admin_user_control_profile_permissions"></ul>
+					   </div>
 				   </div>
-				   <div style="text-align: left; margin-top: 20px; ">
-					   <strong>Berechtigungen: </strong>
-					   <ul id="popup_admin_user_control_profile_permissions"></ul>
+				   <div style="width: 50%; min-height: 200px; float: right; display: flex; flex-direction: column; justify-content: space-around; align-items: center;  ">
+					   <div style="width: 100%; height: 50px; display: flex; justify-content: center; align-items: center; "><button id="popup_admin_user_control_profile_login">Anmelden</button></div>
+                       <div style="width: 100%; height: 50px; display: flex; justify-content: center; align-items: center; "><button id="popup_admin_user_control_profile_change_permissions">Berechtigungen ändern</button></div>
+                       <div style="width: 100%; height: 50px; display: flex; justify-content: center; align-items: center; "><button id="popup_admin_user_control_profile_open_profile">Benutzerprofil</button></div>
 				   </div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_admin_user_control_change_profile_permissions" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow: hidden; font-size: 12px; overflow-y: auto; overflow-x: hidden; " class="popup_support_panel">
+				   <h2 style="text-align: center; ">Berechtigungen: <span id="popup_admin_user_control_change_profile_permissions_username"></span></h2>
+				   <div id="popup_admin_user_control_change_profile_permissions_div"></div>
+		       </div>
+		   </div>
+		   <div class="popup" id="popup_admin_server_info" style="background-color: white; color: black; " onclick="event.stopPropagation();">
+		       <div style="width: 90%; height:100%; margin-left: 5%; overlfow: hidden; font-size: 12px; overflow-y: auto; overflow-x: hidden; " class="popup_support_panel">
+				   <h2 style="text-align: center; ">InfinityWork | Server</h2>
+				   <ul id="popup_admin_server_info_list"></ul>
 		       </div>
 		   </div>
 		   <div class="popup" id="popup_write_email" style="background-color: white; color: black; " onclick="event.stopPropagation();">
@@ -738,26 +867,26 @@
 			        <div style="width: 100%; border-top: 1px solid gray; text-align: center; color: black; ">
 						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
 						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_posteingang');">
-						        <img src="/images/posteingang.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <img loading="lazy" src="/images/posteingang.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
 						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Posteingang (<span id="posteingang_count"></span>)</div>
 						    </div>
 						</div>
 						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
 						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_postausgang');">
-						        <img src="/images/postausgang.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <img loading="lazy" src="/images/postausgang.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
 						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Postausgang (<span id="postausgang_count"></span>)</div>
 						    </div>
 						</div>
 						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
 						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_spam');">
-						        <img src="/images/spam.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <img loading="lazy" src="/images/spam.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
 						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Spam (<span id="spam_count"></span>)</div>
 						    </div>
 						</div>
 						<div style="width: 100%; height: 30px; margin-top: 15px; display: flex; justify-content: center; align-items: center; ">
 						    <div style="width: 180px; height: 30px; position: relative; border: 1px solid gray; cursor: grab; " class="on_hover_press" onclick="open_email_box_menu('email_box_menu_deleted');">
-						        <img src="/images/delete.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
-						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Papierkorb (<span id="deleted_count"></span>)</div>
+						        <img loading="lazy" src="/images/delete.png" style="position: absolute; left: 0px; top: 0px; bottom: 0px; width: 30px; ">
+						        <div style="position: absolute; top: 0px; left: 30px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">Papierkorb</div>
 						    </div>
 						</div>
 				    </div>
@@ -894,14 +1023,134 @@
 	            </div>
 	            <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;  display: flex; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: all 1s; " id="app_game_canvas"></div>
 	            <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px;  display: none; justify-content: center; align-items: center; overflow: hidden; opacity: 0; transition: all 1s; display: flex;  justify-content: center; align-items: center; " id="app_game_menu">
-	                <div style="width: 400px; max-width: 90%; height: 600px; max-height: 90%;">
+	                <div style="width: 400px; max-width: 90%; height: 400px; max-height: 90%;">
 						<input type="text" style="width: 100%; height: 50px; font-size: 28px; " placeholder="Welthoster Name">
-	                    <button style="width: 100%; height: 50px; background-color: orange; font-size: 28px; ">Spiel beitreten</button>
+	                    <button class="on_hover_down" style="width: 100%; height: 50px; background-color: orange; font-size: 28px; ">Spiel beitreten</button>
 	                    <div style="width: 100%; height: 4px; background-color: white; margin-top: 10px; "></div>
-	                    <button style="width: 100%; height: 50px; margin-top: 10px; background-color: orange; font-size: 28px; ">Spiel erstellen</button>
+	                    <button class="on_hover_down" style="width: 100%; height: 50px; margin-top: 10px; background-color: orange; font-size: 28px; ">Spiel erstellen</button>
 	                </div>
 	            </div>
 	        </div>
+        </div>
+        <div class="app" id="app_staysafe_game" style="overflow: hidden; ">
+            <div style="height: 100%; width: 100%; position: relative; overflow: hidden; ">
+				<div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 60px; ">
+				    <iframe style="width: 100%; width: 100%; " width="100%" height="100%" loading="lazy"  src="/games/StaySafe/">Kann nicht geladen werden</iframe>
+				</div>
+                <div style="position: absolute; left: 0px; right: 0px; bottom: 0px; height: 60px; display: flex; justify-content: center; align-items: center;">
+                     <div style="font-size: 22px; font-wieght: bold; color: black; widt: 100%; text-align: center;">Programmiert von Diego ( <a target="_blank" href="https://ggclan.nxlc.de/">https://ggclan.nxlc.de/</a> ), Für Mehr Informationen, hier sein Discord Server: <a href="https://discord.gg/EpuV6aFJ7a" target="_blank">https://discord.gg/EpuV6aFJ7a</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="app" id="app_Tweetin" style="position: fixed; top: 0px; left: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: 101;  opacity: 0; display: none; transition: all 1s; background-color: white; ">
+			<div style="width: 100%; height: 100%; overflow: hidden; background-color: white; color: black; ">
+			    <div style="position: fixed; top: 0px; left: 0px; right: 0px; height: 60px; background-color: lightblue;">
+				    <div style="width: 100%; height: 100%; position: relative; ">
+					    <div style="position: absolute; top: 0px; left: 20px; bottom: 0px; display: flex; justify-content: center; align-items: center; font-size: 30px; font-color: white; cursor: grab; z-index: 4; " onclick="close_app(); ">
+					        InfinityWork | Tweetin
+					    </div>
+					    <div style="position: absolute; top: 0px; right: 20px; bottom: 0px; width: 250px; display: flex; justify-content: center; align-items: center; font-size: 30px; font-color: white; cursor: grab; z-index: 3; ">
+							<div style="position: relative; width: 100%; height: 100%; ">
+								<div id="Tweetin_login_button" style="display: flex; justify-content: center; align-items: center; transition: all 1s; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; ">
+								    <button onclick="open_popup('popup_login'); " style="height: 40px; background-color: lightgreen; color: white; font-size: 20px; border: 0px none; border-radius: 5px; padding-left: 10px; padding-right: 10px; cursor: grab; ">Anmelden</button>
+								    <button onclick="open_popup('popup_register'); " style="margin-left: 20px; height: 40px; background-color: lightred; color: white; font-size: 20px;  border: 0px none; border-radius: 5px; padding-left: 10px; padding-right: 10px; cursor:grab: ">Registrieren</button>
+								</div>
+								<div id="Tweetin_profile_button" onclick="document.getElementById('Tweetin_profile_button_dropdown').style.height = document.getElementById('Tweetin_profile_button_dropdown').style.height == '200px' ? '0px' : '200px';" style="display: none; justify-content: center; align-items: center; transition: all 1s; position: absolute; opacity: 0;  top: 0px; left: 90px; right: 0px; bottom: 0px; ">
+								    <div style="height: 45px; width: 140px; position: relative; ">
+								        <img loading="lazy" src="/images/man.png" style="position: absolute: left: 0px; top: 0px; bottom: 0px; width: 45px; border-radius: 50%; ">
+								        <div id="Tweetin_profile_button_username" style="position: absolute; left: 50px; top: 0px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; text-align: center; font-size: 16px; font-weight: bold; "></div>
+								    </div>
+								</div>
+							</div>
+					    </div>
+					    <div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; display: flex; justify-content: center; align-items: center; ">
+					        <div style="width: 350px; height: 40px; position: relative; border-radius: 20px; overflow: hidden; background-color: white; ">
+					            <input type="text" placeholder="Nach Chats Suchen.." style="position: absolute; top: 0px; left: 0px; right: 40px; bottom: 0px; padding-left: 10px; font-size: 16px; border: 0px none; outline: 0px none; ">
+					            <div style="position: absolute; top: 0px; right: 0px; bottom: 0px; width: 40px; background-color: lightgray; display: flex; justify-content: center; align-items: center; cursor: grab; ">
+					                <img loading="lazy" src="/images/search.png" style="height: 30px; width: 30px; ">
+					            </div>
+					        </div>
+					    </div>
+				    </div>
+				</div>
+				<div id="Tweetin_profile_button_dropdown" style="position: fixed; top: 60px; right: 0px; width: 200px; height: 0px; background-color: lightblue; overflow: hidden; transition: all 0.6s; z-index: 3; ">
+					<div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: stretch; ">
+					    <button style="background-color: lightblue; color: white; font-size: 16px; width: 100%; height: 30px; cursor: grab; border: 0px none; " class="on_hover_press" onclick="close_app(); ">Menu</button>
+					    <button style="background-color: lightblue; color: white; font-size: 16px; width: 100%; height: 30px; cursor: grab; border: 0px none; " class="on_hover_press" onclick="document.getElementById('main_menu_profile_button').click(); ">Profil</button>
+					    <button style="background-color: lightblue; color: white; font-size: 16px; width: 100%; height: 30px; cursor: grab; border: 0px none; " class="on_hover_press" onclick="document.getElementById('main_menu_settings_button').click(); ">Einstellungen</button>
+					    <button style="background-color: lightblue; color: white; font-size: 16px; width: 100%; height: 30px; cursor: grab; border: 0px none; " class="on_hover_press" onclick="logout(); ">Abmelden</button>
+				    </div>
+				</div>
+				<div style="position: fixed; top: 60px; left: 0px; right: 0px; bottom: 0px; background-color: white; overflow: hidden;">
+					 <div style="height: 100%; width: 100%; position: relative; ">
+					     <div id="Tweetin_mainpage_wellcome_window" style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 3; display: block; opacity: 1; transition: all 1s; background-color: white; ">
+					         <h2 style="font-size: 40px; text-align: center; ">Hier entsteht Tweetin!</h2>
+		                     <p style="font-size: 20px; text-align: center; ">Für Mehr Informationen treten gerne unserem Discord Server bei: <a href="https://discord.gg/5VeQ3ndGuJ">https://discord.gg/5VeQ3ndGuJ</a></p>
+		                     <div style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
+		                         <button style="width: 200px; height: 50px; font-size: 24px; text-align: center; " onclick="tweetin_start(); ">Starten</button>
+		                     </div>
+					     </div>
+					     <div id="Tweetin_mainpage_main" style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; z-index: 2; display: block; opacity: 1; transition: all 1s; background-color: white; ">
+							 <div style="height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; ">
+						         <div style="width: 1100px; max-width: 95%; min-width: 75%; height: 100%; position: relative; ">
+						             <div style="position: absolute; top: 0px; bottom: 0px; left: 0px; width: 200px; display: flex; justify-content: center; align-items: center; ">
+						                 <div style="width: 100%; height: 95%; ">
+						                     <div style="width: 100%; height: 50px; position: relative; " class="on_hover_press">
+						                         <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; width; 50px; height: 50px; "><img loading="lazy" src="/images/news.png" style="width: 100%; height: 100%; "></div>
+						                         <div style="position: absolute; top: 0px; left: 50px; right: 0px; bottom: 0px; display: flex; justify-content: center; align-items: center; font-size: 20px; ">
+						                             Neues
+						                         </div>
+						                     </div>
+						                     <div style="width: 100%; height: 50px; position: relative; margin-top: 20px; " class="on_hover_press">
+						                         <div style="position: absolute; top: 0px; left: 0px; bottom: 0px; width; 50px; height: 50px; "><img loading="lazy" src="/images/publish.png" style="width: 100%; height: 100%; "></div>
+						                         <div style="position: absolute; top: 0px; left: 50px; right: 0px; bottom: 0px; display: flex; justify-content: center; align-items: center; font-size: 20px; ">
+						                             Post schreiben
+						                         </div>
+						                     </div>
+						                 </div>
+						             </div>
+						             <div id="Tweetin_feed_container" style="position: absolute; top: 0px; bottom: 0px; left: 260px; right: 0px; overflow-x: hidden; overflow-y: auto; " >
+										 <div style="width: 100%; ">
+							                 <div class="Tweetin_post_container">
+												 <div style="width: 100%; height: 50px; border-bottom: 1px solid lightblue;  display: flex; justify-content: center; align-items: center; ">
+													 <div style="width: 100%; height: 40px; position: relative; ">
+													     <div style="position: absolute; top: 0px; bottom: 0px; left: 20px; width: 40px; "><img src="/images/man.png" loading="lazy" style="width: 100%; height: 100%; "></div>
+													     <div style="position: absolute; top: 0px; bottom: 0px; left: 70px; right: 0px; ">
+													         <div style="width: 100%; height: 16px; font-weight: bold; ">Tilo Behnke</div>
+													         <div style="width: 100%; height: 14px; font-weight: small; font-size: 9px; ">100+ Abbonenten</div>
+													     </div>
+												     </div>
+												 </div>
+							                     <div style="height: 200px; width: 100%; margin-top: 20px; ">
+							                         YEAH! Erster TweetIn Post!!!!!!
+							                         Einfach Krass!!!!
+							                     </div>
+							                     <div style="width: 100%; height: 27px; border-top: 1px solid lightblue; display: flex; justify-content: space-around; align-items: center; ">
+							                         <div style="height: 19px; width: 65px; border: 1px solid blue; border-radius: 5px; position: relative; ">
+							                             <div style="position: absolute; top: 2px; left: 3px; bottom: 2px; width: 15px; "><img src="/images/heart.png" style="height: 100%; width: 100%; "></div>
+							                             <div style="position: absolute; top: 0px; left: 18px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">98</div>
+							                         </div>
+							                         <div style="height: 19px; width: 65px; border: 1px solid blue; border-radius: 5px; position: relative; ">
+							                             <div style="position: absolute; top: 2px; left: 3px; bottom: 2px; width: 15px; "><img src="/images/like.png" style="height: 100%; width: 100%; "></div>
+							                             <div style="position: absolute; top: 0px; left: 18px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">240k</div>
+							                         </div>
+							                         <div style="height: 19px; width: 65px; border: 1px solid blue; border-radius: 5px; position: relative; ">
+							                             <div style="position: absolute; top: 2px; left: 3px; bottom: 2px; width: 15px; "><img src="/images/dislike.png" style="height: 100%; width: 100%; "></div>
+							                             <div style="position: absolute; top: 0px; left: 18px; bottom: 0px; right: 0px; display: flex; justify-content: center; align-items: center; ">0</div>
+							                         </div>
+							                     </div>
+							                 </div>
+							                 <div style="width: 100%; height: 29px; display: flex; justify-content: center; align-items: center; ">
+							                     <a href="#" style="font-size: 10px;">Kommentare anzeigen (13)</a>
+							                 </div>
+						                 </div>
+						             </div>
+						         </div>
+					         </div>
+					     </div>
+					 </div>
+				</div>
+            </div>
         </div>
 	</body>
 </html>
