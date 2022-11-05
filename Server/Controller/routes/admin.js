@@ -73,4 +73,12 @@ module.exports = function(){
 		app.database.save_data("seasons", new_season, JSON.stringify({"username": options.username, "time": (new Date()).toString()}));
 		callback({"success": true, "season": new_season});
 	}, ["update_user"]);
+	app.routes.user_action("change_user_status", async function(options, callback, username){
+		if(!options.username) options.username = username;
+        var value = await app.database.get_data("user_profile_"+options.username, "status");
+        if(!value || value == "") value = {};
+        value[options.text] = options.url;
+		app.database.save_data("user_profile_"+options.username, "status", value);
+		callback({"success": true});
+	}, ["update_user"]);
 };

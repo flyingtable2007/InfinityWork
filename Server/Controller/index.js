@@ -7,6 +7,7 @@ const { JsonStreamStringify } = require('json-stream-stringify');
 const JSONStream = require('JSONStream');
 const mime = require('mime-types')
 const make_request = require('request');
+const Readable = require('stream').Readable; 
 
 https.globalAgent.maxSockets = Infinity;
 
@@ -41,6 +42,7 @@ function encoded_response(request, response, stream, mime_type, headers = {}, st
 	stream.pipe(response)
 }
 
+var cache_buffer = {};
 function send_file(file_path, request, response, is_attachment_filename){
 	fs.exists(file_path, (exists) => {
 		if(!exists) return response.writeHead(404).end();
@@ -57,10 +59,6 @@ function send_file(file_path, request, response, is_attachment_filename){
 				const start = parseInt(parts[0], 10);
 				const end = parts[1] ? parseInt(parts[1], 10) : stats.size-1;
 				const chunksize = (end-start) + 1;
-				const file = fs.createReadStream(file_path, {start, end});
-				file.onerror = function(){
-					response.writeHead(500).end();
-				}
 				const header = {
 					'Content-Range': `bytes ${start}-${end}/${stats.size}`,
 					'Accept-Ranges': 'bytes',
@@ -68,14 +66,45 @@ function send_file(file_path, request, response, is_attachment_filename){
 					'Content-Type': mime_type || "",
 					'Content-Disposition': is_attachment_filename ? 'attachment; filename="'+is_attachment_filename+'"' : 'inline'
 			    };
-				encoded_response(request, response, file, mime_type, header, 206, file_path.endsWith(".br"))
+			    var stream = new Readable({read(size) {}});
+			    
+			    if(file_path in cache_buffer){
+					stream.push(cache_buffer[file_path].slice(start, end));
+                    stream.push(null);
+                } else {
+					const file_part_read_stream = fs.createReadStream(file_path, {start, end});
+					file_part_read_stream.on('data', function(d){
+						stream.push(d);
+					});
+					file_part_read_stream.on('end', function(d){
+						stream.push(null);
+					});
+				}
+				encoded_response(request, response, stream, mime_type, header, 206, file_path.endsWith(".br"))
 			} else {
 				const head = {
 				    'Content-Length': stats.size,	
 				    'Content-Type': mime_type || "",
 				    'Content-Disposition': is_attachment_filename ? 'attachment; filename="'+is_attachment_filename+'"' : 'inline'
 				};
-				encoded_response(request, response, fs.createReadStream(file_path), mime_type, head, 200, file_path.endsWith(".br"))
+				var stream = new Readable({read(size) {}});
+				if(file_path in cache_buffer){
+					 head['Content-Length'] = cache_buffer[file_path].length;
+					 stream.push(cache_buffer[file_path]);
+                     stream.push(null);
+				} else {
+					var file_read_stream = fs.createReadStream(file_path);
+					var new_buffs = [];
+					file_read_stream.on('data', function(d){
+						stream.push(d);
+						new_buffs.push(d);
+					});
+					file_read_stream.on('end', function(){
+						stream.push(null);
+					    cache_buffer[file_path] = Buffer.concat(new_buffs);
+					});
+				}
+				encoded_response(request, response, stream, mime_type, head, 200, file_path.endsWith(".br"));
 			}
 		});
 	});
@@ -174,7 +203,7 @@ module.exports = class {
 			var cacheId = Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString()+Math.random().toString();
 			var richtige_endung = name.split(".")[name.split(".").length-1];
 			var endung = richtige_endung.length > 8 ? ".file" : richtige_endung;
-			var chachePath = process.cwd()+"/data/email_attachments/"+cacheId+"."+endung+"/"+name;
+			var chachePath = process.cwd()+"/data/email_attachments/"+cacheId+"."+endung;
 			var writeStream = fs.createWriteStream(chachePath);
 			var id = app.config.own_server_ip+"/"+cacheId+"."+endung;
 	        request.pipe(writeStream);
@@ -200,7 +229,7 @@ module.exports = class {
 			});
 			return;
 		}
-		var host = (request.headers.host || app.config.domain) == app.config.domain ? false : request.headers.host;
+		var host = ((request.headers.host || app.config.domain) == app.config.domain || request.headers.host == "localhost") ? false : request.headers.host;
 		if(path.endsWith("/")) path += "index.html";
 		path = process.cwd()+ app.config.frontend + (host ? "/"+host : "") + path;
 		send_file(path, request, response);

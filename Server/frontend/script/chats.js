@@ -12,7 +12,7 @@ window.open_chat = function(data, on_message_count_change = function(){}){
 	   b.style = "width: 100%; height: 75px; margin-top: 20px; text-align: center; border-bottom: 1px solid black;";
 	   var c = document.createElement("div");
 	   c.style = "width: 100%; height: 40px; font-size: 24px; font-weight: bold; display: flex; justify-content: center; align-items: center;";
-	   c.innerText = data.name;
+	   c.innerText = data.header;
 	   b.appendChild(c);
 	   var d = document.createElement("div");
 	   d.style = "width: 100%; height: 35px; font-size: 14px; display: flex; justify-content: center; align-items: center;";
@@ -58,10 +58,13 @@ window.open_chat = function(data, on_message_count_change = function(){}){
 	   f.placeholder = "Dein Beitrag..";
 	   f.onkeypress = function(event){
 		   if (event.keyCode == 13) {
-			   var text = f.value;
-			   f.value = "";
-			   request("write_chat_message", {"chat": data.name, "text": text}, function(response){
-		       });
+			   if(season_user_data){
+			       var text = f.value;
+				   f.value = "";
+				   request("write_chat_message", {"chat": data.name, "text": text}, function(response){});
+			   } else {
+				   open_popup("popup_login");
+			   }
 		   }
 	   };
 	   e.appendChild(f);
@@ -92,7 +95,7 @@ window.show_dicussion_chats = function(data){
 			};
 		    var b = document.createElement("div");
 		    b.style = "height: 25px; width: 100%; font-size: 14px; font-weight: bold; display: flex; align-items: center; ";
-		    b.innerText = chat.name;
+		    b.innerText = chat.header;
 		    a.appendChild(b);
 		    var c = document.createElement("div");
 		    c.style = "height: 25px; width: 100%; font-size: 12px; display: flex; align-items: center;";
@@ -131,4 +134,17 @@ window.show_dicussion_chats = function(data){
 			update_message_count_info(chat.contributions_count);
 		});
 	});
+};
+window.show_main_discussion_chats = function(){
+	chats_open_discussion_popup({"header": "InfinityWork | Diskussion", "subheader": "Unterhalten Sie sich mit anderen InfinityWork mitgliedern über verschiedenste Themen. ", "chats": [
+		{"name": "infinitywork_allgemeines", "text": "Smaltalk über Allgemeines", "header": "Allgemeines"},
+	    {"name": "infinitywork_python", "text": "Alles über die Programmiersprache Python", "header": "Python"},
+	    {"name": "infinitywork_minecraft", "text": "Das beliebteste Spiel ever?", "header": "Minecraft"}
+	]});
+};
+window.chats_open_discussion_popup = function(data){
+	document.getElementById("popup_chat_header").innerText = data.header;
+	document.getElementById("popup_chat_subheader").innerText = data.subheader;
+	show_dicussion_chats(data.chats);
+	open_popup('popup_chat');
 };

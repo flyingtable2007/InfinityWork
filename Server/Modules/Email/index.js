@@ -79,6 +79,8 @@ module.exports = class {
 					}
 					postfach = JSON.parse(postfach);
 					email_object.username = postfach.username;
+					email_object.bit_id = postfach.bit_id;
+					
 					var is_spam = false;
 				    var warning = false;
 				    
@@ -148,27 +150,28 @@ module.exports = class {
 	}
 	async action(action, data, callback = async function(){}){
 	    if(action == "new_email"){
-			var postfachPath = process.cwd()+"/data/emails/"+data.to+"_"+data.username+"."+(data.spam ? "spam" : "posteingang");
+			var bit_id = await get_bit_id_of_user(data.username);
+			var postfachPath = process.cwd()+"/data/emails/"+data.to+"_"+bit_id+"."+(data.spam ? "spam" : "posteingang");
 		    fs.appendFile(postfachPath, JSON.stringify(data)+"\n", error => {
 			    if (error) app.logger.log("Error: Error saving email: "+error);
 			});
 			app.database.send_to_user_socket_connection(data.username, {"action": "new_email", "data": {"box": data.spam, "email": data.to, "data": data}, "app": "email"});
 		} else if(action == "get_all_emails"){
+			var bit_id = await get_bit_id_of_user(data.username);
 			var deleted = {};
-			var path = process.cwd()+"/data/emails/"+data.email+"_"+data.username+".deleted";
+			var path = process.cwd()+"/data/emails/"+data.email+"_"+bit_id+".deleted";
 			if(fs.existsSync(path)){
-				deleted = JSON.parse(fs.readFileSync(path, "utf-8"));
+				try {
+				    deleted = JSON.parse(fs.readFileSync(path, "utf-8"));
+				} catch(e){
+					console.log(e);
+				}
 			}
 			var all_emails = {"deleted": []};
-			async function asyncForEach(array, callback) {
-			    for (let index = 0; index < array.length; index++) {
-			        await callback(array[index], index, array);
-			    }
-			}
 			for(var i = 0; i < 3; i++){
 				var type = ["posteingang", "postausgang", "spam"][i]
 				await new Promise(function(resolve, reject){
-					var postfachPath = process.cwd()+"/data/emails/"+data.email+"_"+data.username+"."+type;
+					var postfachPath = process.cwd()+"/data/emails/"+data.email+"_"+bit_id+"."+type;
 					if(!fs.existsSync(postfachPath)){
 					    all_emails[type] = [];
 						return resolve();
@@ -197,20 +200,43 @@ module.exports = class {
 			};
 			callback(all_emails);
 		} else if(action == "delete_email"){
+			var bit_id = await get_bit_id_of_user(data.username);
 			var deleted = {};
-			var path = process.cwd()+"/data/emails/"+data.email+"_"+data.username+".deleted";
+			var path = process.cwd()+"/data/emails/"+data.email+"_"+bit_id+".deleted";
 			if(fs.existsSync(path)){
-				deleted = JSON.parse(fs.readFileSync(path, "utf-8"));
+				try {
+				    deleted = JSON.parse(fs.readFileSync(path, "utf-8"));
+				} catch(e){
+					console.log(e);
+				}
 			}
 			deleted[data.id] = {"show_as_deleted": true};
 			fs.writeFile(path, JSON.stringify(deleted), 'utf8', function(error) {
 		        if (error) return app.logger.log("Error: Error saving Email Postfach: "+error);
 		    });
+		} else if(action == "restore_email"){
+			var bit_id = await get_bit_id_of_user(data.username);
+			var deleted = {};
+			var path = process.cwd()+"/data/emails/"+data.email+"_"+bit_id+".deleted";
+			if(fs.existsSync(path)){
+				try {
+				    deleted = JSON.parse(fs.readFileSync(path, "utf-8"));
+				} catch(e){
+					console.log(e);
+			    }
+			}
+			if(data.id in deleted) {
+				delete deleted[data.id];
+				fs.writeFile(path, JSON.stringify(deleted), 'utf8', function(error) {
+			        if (error) return app.logger.log("Error: Error saving Email Postfach: "+error);
+			    });
+			}
 		} else {
 		    app.logger.log("Error: Unknown action: "+action);	
 		}
 	}
-	send(username, from, to, subject, text, attachments, callback = false){
+	async send(username, from, to, subject, text, attachments, callback = false){
+		var bit_id = await get_bit_id_of_user(username);
 		var email_object = {
 			"id": Math.random().toString()+Math.random().toString()+Math.random().toString(),
 			"date": (new Date()).toString(),
@@ -224,7 +250,7 @@ module.exports = class {
 		attachments.forEach(function(d){
 			email_object.files.push({"filename": d.filename, "id": d.id});
 	    });
-		var postfachPath = process.cwd()+"/data/emails/"+from+"_"+username+".postausgang";
+		var postfachPath = process.cwd()+"/data/emails/"+from+"_"+bit_id+".postausgang";
 	    fs.appendFile(postfachPath, JSON.stringify(email_object)+"\n", error => {
 		    if (error) app.logger.log("Error: Error saving email: "+error);
 		});

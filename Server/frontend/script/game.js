@@ -18,17 +18,6 @@ window.start_game_app = function(){
     open_app('game');
     load_game();
 };
-window.load_js_file = function(url){
-    return new Promise(function(resolve, reject){
-		const script = document.createElement('script');
-		script.src = url;
-		script.addEventListener('load', function() {
-		    console.log(url + " loaded!");
-		    resolve();
-	    });
-		document.head.appendChild(script);
-	});
-};
 
 class Loader {
     constructor() {

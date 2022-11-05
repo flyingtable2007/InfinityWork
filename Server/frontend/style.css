@@ -279,3 +279,10 @@ iframe {
     -webkit-box-shadow: 1px 5px 52px 9px rgba(147,109,248,0.09);
     -moz-box-shadow: 1px 5px 52px 9px rgba(147,109,248,0.09);
 }
+.hidden_scrollbar {
+    -ms-overflow-style: none;  
+	scrollbar-width: none;  
+}
+.hidden_scrollbar::-webkit-scrollbar {
+	display: none;
+}

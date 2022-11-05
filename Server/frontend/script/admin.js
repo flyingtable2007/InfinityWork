@@ -1,4 +1,5 @@
 window.start_support_panel = function(){
+	open_app('support');
 	request("get_all_support_requests", {"start": 0}, function(response){
 		document.getElementById("app_support_list").innerHTML = "";
 		response.messages.reverse().forEach(function(m){
@@ -56,12 +57,11 @@ window.start_support_panel = function(){
 			};
 			document.getElementById("app_support_list").appendChild(e);
 		});
-		open_app('support');
 	});
 };
 window.admin_open_user_profile = function(){
 	var username = document.getElementById("popup_admin_user_control_username").value;
-	request("get_user_info", {"username": username}, function(response){
+	request("get_user_info", {"username": username}, async function(response){
 		document.getElementById("popup_admin_user_control_profile_username").innerText = username;
 		document.getElementById("popup_admin_user_control_profile_emails").innerText = "";
 		response.data.email_addresses.forEach(function(email){
@@ -76,6 +76,31 @@ window.admin_open_user_profile = function(){
 			e.innerText = p;
 			document.getElementById("popup_admin_user_control_profile_permissions").appendChild(e);
 		});
+		document.getElementById("popup_admin_user_control_profile_status").innerText = "";
+		var status_list = await get_user_profile_data("status", username);
+		if(!status_list || status_list == "") status_list = {};
+		var all = {
+			"Premium Mitglied": "/images/diamond.png",
+			"Verifiziert": "/images/check.png",
+			"Mitarbeiter": "/images/wrench.png"
+		};
+		Object.keys(all).forEach(function(s){
+			var e = document.createElement("li");
+			var f = document.createElement("div");
+			var g = document.createElement("input");
+			g.type = "checkbox";
+			g.checked = status_list[s] ? true : false;
+			g.onclick = function(){
+				request("change_user_status", {"username": username, "text": s, "url": g.checked ? all[s] : false});
+			};
+			f.appendChild(g);
+			var h = document.createElement("span");
+			h.innerText = s;
+			f.appendChild(h);
+			e.appendChild(f);
+			document.getElementById("popup_admin_user_control_profile_status").appendChild(e);
+		});
+		
 		document.getElementById("popup_admin_user_control_profile_login").style.display = season_user_data.permissions["update_user"] ? "block" : "none";
 		document.getElementById("popup_admin_user_control_profile_login").onclick = function(){
 			request("admin_login_with_other_user_account", {"username": username}, function(response){

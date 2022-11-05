@@ -48,10 +48,35 @@ window.show_email = function(box, email, d){
 		email_boxes_counts[box]--;
 		update_emails_count();
 		if(opened_email_subject == d.subject) document.getElementById("app_email_email_preview_"+(last_email_preview_used_div ? 1 : 2)).style.opacity = 0;	
-		request("delete_email", {"email": email, "id": d.id}, function(data){
-		     console.log(data);
-		});
+		request("delete_email", {"email": email, "id": d.id});
 	};
+	function restore_email(event){
+		console.log(d);
+		if(box != "deleted") return;
+		event.stopPropagation();
+		var new_box = "posteingang";
+		setTimeout(function(){
+			c.style.height = "0px";
+			c.style.marginTop = "0px";
+			setTimeout(function(){
+		        c.style.display = "none";
+		        if(email_box_divs[box][email].count == 0){
+					email_box_divs[box][email].container.innerText = "Leer";
+					email_box_divs[box][email].container.style = "width: 100%; text-align: center; height: 30px; margin-top: 20px; ";
+				}
+		    }, 1000);
+		}, 20);
+		if(email_box_divs[new_box][email].count == 0){
+			email_box_divs[new_box][email].container.innerHTML = "";
+            email_box_divs[new_box][email].container.style = "width: 100%; text-align: center; ";
+        }
+		show_email(new_box, email, d);
+		email_box_divs[box][email].count--;
+		email_boxes_counts[new_box]++;
+		update_emails_count();
+		if(opened_email_subject == d.subject) document.getElementById("app_email_email_preview_"+(last_email_preview_used_div ? 1 : 2)).style.opacity = 0;	
+		request("restore_email", {"email": email, "id": d.id});
+	}
 	c.onclick = function(){
 		opened_email_subject = d.subject;
 		last_email_preview_used_div = !last_email_preview_used_div;
@@ -82,8 +107,8 @@ window.show_email = function(box, email, d){
 			document.getElementById("popup_write_email_select_sender_email").value = d.to;
 			document.getElementById("popup_write_email_subject").value = "FW: "+d.subject;
 		};
-		document.getElementById("app_email_email_preview_"+id+"_delete_button").style.display = box == "deleted" ? "none" : "block";
-		document.getElementById("app_email_email_preview_"+id+"_delete_button").onclick = delete_email;
+		document.getElementById("app_email_email_preview_"+id+"_delete_button").innerHTML = box == "deleted" ? "&larr; Wiederherstellen" : "&#215; Löschen";
+		document.getElementById("app_email_email_preview_"+id+"_delete_button").onclick = box == "deleted" ? restore_email : delete_email;
 
 		document.getElementById("app_email_email_preview_"+id+"_content").innerHTML = "";
 		var e = document.createElement("iframe");
@@ -104,7 +129,6 @@ window.show_email = function(box, email, d){
 			f.classList.add("on_hover_down");
 			f.innerText = a.filename.length < 20 ? a.filename : a.filename.slice(0,20) + "..";
 			f.onclick = function(){
-				console.log(a);
 				open_popup("popup_email_attachment");
 				document.getElementById("popup_email_attachment_email").innerText = d.from;
 				document.getElementById("popup_email_attachment_mailserver").innerText = d.sender;
@@ -125,30 +149,22 @@ window.show_email = function(box, email, d){
 				     document.getElementById("popup_email_attachment_preview").appendChild(preview);
 				}
 				document.getElementById("popup_email_attachment_download_button").onclick = function(){
-					const download = (path, filename) => {
-					    const anchor = document.createElement('a');
-					    anchor.href = path;
-					    anchor.download = filename;
-					    document.body.appendChild(anchor);
-					    anchor.click();
-					    document.body.removeChild(anchor);
-					};
-					download("/attachment/"+a.id, a.filename);
+					window.open("/attachment/"+a.id+"/"+a.filename, "_blank");
 				};
 			};
 			document.getElementById("app_email_email_preview_"+id+"_attachments").appendChild(f);
 		});
 	};
 	var f = document.createElement("div");
-	f.style = "width: 100%; text-align: left; margin-top: 5px; ";
+	f.style = "width: 100%; text-align: left; margin-top: 5px; word-wrap: break-word; ";
 	f.innerText = d.subject;
 	c.appendChild(f);
 	var g = document.createElement("div");
-	g.style = "width: 100%; text-align: left; margin-top: 10px; ";
+	g.style = "width: 100%; text-align: left; margin-top: 10px; word-wrap: break-word; ";
 	g.innerText = d.from;
 	c.appendChild(g);
 	var h = document.createElement("div");
-	h.style = "width: 100%; text-align: left; margin-top: 10px; font-weight: lighter; font-size: 10px; text-align: center; ";
+	h.style = "width: 100%; text-align: left; margin-top: 10px; font-weight: lighter; font-size: 10px; text-align: center; word-wrap: break-word; ";
 	h.innerText = (new Date(d.date)).toLocaleString('de-DE');
 	c.appendChild(h);
 	var i = document.createElement("div");
@@ -162,12 +178,13 @@ window.show_email = function(box, email, d){
 	    i.appendChild(j);
 	}
 	c.appendChild(i);
-	email_box_divs[box][email].container.appendChild(c);
+	email_box_divs[box][email].container.prepend(c);
 }
 
 window.last_email_preview_used_div = true;
 window.opened_email_subject = false;
 window.email_box_divs = {};
+window.own_email_addresses_count = 0;
 window.email_boxes_counts = {"posteingang": 0, "postausgang": 0, "spam": 0};
 window.update_emails_count = function(){
 	document.getElementById("posteingang_count").innerText = email_boxes_counts.posteingang.toString();
@@ -189,6 +206,7 @@ window.show_only_emails_of_one_address = function(email){
 	});
 };
 window.start_email_app = function(after_delting_email = false){
+	open_app('email');
 	email_boxes_counts = {"posteingang": 0, "postausgang": 0, "spam": 0};
 	socket.emit("abbo", "email");
 	socket.on("new_email", function(data){
@@ -196,14 +214,16 @@ window.start_email_app = function(after_delting_email = false){
 	});
 	request("get_email_addresses_of_user", {}, function(data){
 		if(data.addresses.length == 0 && !after_delting_email) return open_popup('popup_create_email_postfach');
-		if(data.addresses.length == 0 && after_delting_email) return close_app();
+		//if(data.addresses.length == 0 && after_delting_email) return close_app();
+		own_email_addresses_count = data.addresses.length;
 		document.getElementById("app_email_addresses").innerHTML = "";
 		document.getElementById("popup_write_email_select_sender_email").innerHTML = "";
 		data.addresses.forEach(function(email){
 			var e = document.createElement("li");
 			e.style = "cursor: grab; ";
 			e.innerText = email;
-			e.oncontextmenu = function(){
+			e.oncontextmenu = function(event){
+				event.preventDefault();
 				document.getElementById("popup_email_address_info_email").innerText = email;
 				document.getElementById("popup_email_address_info_delete_button").onclick = function(){
 					document.getElementById("popup_delete_email_confirm_email").innerText = email;
@@ -272,7 +292,6 @@ window.start_email_app = function(after_delting_email = false){
 				}
 			});
 	    });
-		open_app('email');
 	});
 };
 window.send_email = function(){
@@ -393,4 +412,8 @@ window.add_file_to_email = function(){
 		}
 		document.getElementById("popup_write_email_added_files").appendChild(el);
 	};
+};
+window.open_email_write_editor = function(){
+	if(own_email_addresses_count == 0) return open_popup('popup_create_email_postfach');
+	open_popup('popup_write_email');
 };

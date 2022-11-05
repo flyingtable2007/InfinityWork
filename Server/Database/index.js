@@ -73,7 +73,7 @@ module.exports = class {
 	    this.data[database][key] = data;
 	    this.send_to_all_backend_servers("new_data_to_list", {"database": database, "key": key, "value": value, "id": id});
 	}
-	async get_data(database, key){
+	get_data(database, key){
 	    return new Promise(function(resolve, reject){
 			if(!(database in app.database.data)) app.database.data[database] = {};
 	        var data = app.database.data[database][key] || {"value": "", "verified": false, "time": 0};
@@ -92,6 +92,12 @@ module.exports = class {
 				});
 				resolve(current_version.value != "" ? current_version.value : false);
 			});
+	    });
+	}
+	get_all_data(database){
+		return new Promise(function(resolve, reject){
+			if(!(database in app.database.data)) app.database.data[database] = {};
+			resolve(app.database.data[database]);
 	    });
 	}
 	send_to_all_backend_servers(text, value = false, answer = false){
@@ -202,7 +208,7 @@ module.exports = class {
 			app.logger.log("Error: Loading Database: "+e);
 			this.data = {};
 		}
-		setInterval(this.save, 0.01*60*60*1000);
+		setInterval(this.save, 0.03*60*60*1000);
 	}
     save(){
 	    var stream = new JsonStreamStringify(app.database.data);
